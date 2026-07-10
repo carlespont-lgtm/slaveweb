@@ -34,7 +34,6 @@ export const routeSegments: Record<string, Record<Locale, string>> = {
   cloud: { ca: 'nuvol', es: 'nube', en: 'cloud' },
   service: { ca: 'servei', es: 'servicio', en: 'service' },
   news: { ca: 'noticies', es: 'noticias', en: 'news' },
-  kitdigital: { ca: 'kit-digital', es: 'kit-digital', en: 'kit-digital' },
 };
 
 export function localePrefix(locale: Locale): string {

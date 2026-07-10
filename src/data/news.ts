@@ -47,21 +47,6 @@ export const posts: Post[] = [
     link: { label: two('Prova la demo', 'Prueba la demo', 'Try the demo'), href: 'https://demo.gestioerp.com/login' },
   },
   {
-    slug: 'kit-digital-ajudes',
-    date: '2026-03-02',
-    tag: two('Kit Digital', 'Kit Digital', 'Kit Digital'),
-    title: two('Kit Digital: aprofita les ajudes per digitalitzar-te', 'Kit Digital: aprovecha las ayudas para digitalizarte', 'Kit Digital: use the grants to go digital'),
-    excerpt: two(
-      'Com a agents digitalitzadors t\'ajudem a aprofitar les ajudes del Kit Digital, amb tota la tramitació inclosa.',
-      'Como agentes digitalizadores te ayudamos a aprovechar las ayudas del Kit Digital, con toda la tramitación incluida.',
-      'As digitalisation agents we help you use Kit Digital grants, with all the paperwork included.'),
-    body: [
-      two('El Kit Digital finança la digitalització de pimes i autònoms: web, comerç electrònic, gestió, ciberseguretat i comunicacions. Nosaltres t\'assessorem i tramitem l\'ajuda de principi a fi.', 'El Kit Digital financia la digitalización de pymes y autónomos: web, comercio electrónico, gestión, ciberseguridad y comunicaciones. Nosotros te asesoramos y tramitamos la ayuda de principio a fin.', 'Kit Digital funds the digitalisation of SMEs and freelancers: web, e-commerce, management, cybersecurity and communications. We advise you and handle the grant from start to finish.'),
-      two('Contacta amb nosaltres i t\'avisarem tan bon punt s\'obri una nova convocatòria.', 'Contacta con nosotros y te avisaremos en cuanto se abra una nueva convocatoria.', 'Contact us and we\'ll let you know as soon as a new call opens.'),
-    ],
-    link: { label: two('Veure el Kit Digital', 'Ver el Kit Digital', 'See Kit Digital'), href: '/kit-digital' },
-  },
-  {
     slug: 'wifi-hotels-unifi',
     date: '2026-01-20',
     tag: two('Xarxes', 'Redes', 'Networks'),
