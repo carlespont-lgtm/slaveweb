@@ -1,0 +1,58 @@
+---
+import { useTranslations, localizedPath, localePrefix, type Locale } from '../i18n/utils';
+import Logo from './Logo.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-slate-100 bg-slate-50">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="sm:col-span-2 lg:col-span-1">
+      <Logo />
+      <p class="mt-4 max-w-xs text-sm leading-relaxed text-slate-500">{t('footer.tagline')}</p>
+    </div>
+
+    <div>
+      <p class="text-sm font-bold uppercase tracking-wide text-slate-800">{t('footer.services')}</p>
+      <ul class="mt-4 space-y-2.5 text-sm text-slate-600">
+        <li><a class="transition hover:text-brand-700" href={localizedPath('services', locale)}>{t('nav.services')}</a></li>
+        <li><a class="transition hover:text-brand-700" href={localizedPath('maintenance', locale)}>{t('nav.maintenance')}</a></li>
+        <li><a class="transition hover:text-brand-700" href={localizedPath('solutions', locale)}>{t('nav.solutions')}</a></li>
+        <li><a class="transition hover:text-brand-700" href={localizedPath('cloud', locale)}>{t('nav.cloud')}</a></li>
+        <li><a class="transition hover:text-brand-700" href={localizedPath('product', locale)}>{t('nav.product')}</a></li>
+        <li><a class="transition hover:text-brand-700" href={localizedPath('support', locale)}>{t('support.eyebrow')}</a></li>
+        <li><a class="transition hover:text-brand-700" href={localizedPath('contact', locale)}>{t('nav.cta')}</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-sm font-bold uppercase tracking-wide text-slate-800">{t('footer.company')}</p>
+      <ul class="mt-4 space-y-2.5 text-sm text-slate-600">
+        <li><a class="transition hover:text-brand-700" href={localizedPath('contact', locale)}>{t('nav.contact')}</a></li>
+        <li><a class="transition hover:text-brand-700" href={localizedPath('legal', locale)}>{t('nav.legal')}</a></li>
+        <li><a class="transition hover:text-brand-700" href={localizedPath('cookies', locale)}>{t('cookies.title')}</a></li>
+        <li><a class="inline-flex items-center gap-1 transition hover:text-brand-700" href="https://fitoware.com" target="_blank" rel="noopener">fitoware.com ↗</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-sm font-bold uppercase tracking-wide text-slate-800">{t('footer.group')}</p>
+      <ul class="mt-4 space-y-2.5 text-sm text-slate-600">
+        <li><a class="inline-flex items-center gap-1 transition hover:text-brand-700" href="https://siamcloud.es" target="_blank" rel="noopener">SIAM Cloud ↗</a></li>
+        <li><a class="inline-flex items-center gap-1 transition hover:text-brand-700" href="https://gestioerp.com" target="_blank" rel="noopener">GestioERP ↗</a></li>
+        <li><a class="inline-flex items-center gap-1 transition hover:text-brand-700" href="https://pontsoft.cat" target="_blank" rel="noopener">Pontsoft ↗</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-slate-200">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-6 text-sm text-slate-500 sm:flex-row">
+      <p>© {year} {t('footer.legalname')} · {t('footer.rights')}</p>
+      <p>Botarell · Catalunya</p>
+    </div>
+  </div>
+</footer>

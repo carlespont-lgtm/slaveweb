@@ -1,0 +1,67 @@
+---
+import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
+import Icon from '../Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const mock = (base: string) => `/mockups/${base}${locale === 'ca' ? '-ca' : locale === 'en' ? '-en' : ''}.svg`;
+---
+<!-- HEADER -->
+<section class="relative overflow-hidden bg-gradient-to-br from-ink-950 via-ink-900 to-brand-800">
+  <div class="slv-dots absolute inset-0 opacity-60"></div>
+  <div class="relative mx-auto max-w-6xl px-4 py-20">
+    <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white backdrop-blur">
+      <Icon name="leaf" class="h-4 w-4 text-brand-300" /> {t('product.eyebrow')}
+    </span>
+    <h1 class="mt-6 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">{t('product.title')}</h1>
+    <p class="mt-5 max-w-2xl text-lg text-brand-50/85">{t('product.desc')}</p>
+    <div class="mt-8">
+      <a href="https://fitoware.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-lg transition hover:bg-brand-400">
+        {t('product.cta')} <Icon name="external" class="h-5 w-5" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MOCKUP + BULLETS -->
+<section class="bg-white py-20">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 lg:grid-cols-2">
+    <div class="reveal overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
+      <img src={mock('fitoware-especies')} alt="Fitoware" loading="lazy" class="w-full" />
+    </div>
+    <div class="reveal">
+      <h2 class="text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">{t('nav.product')}</h2>
+      <ul class="mt-6 space-y-4 text-slate-700">
+        <li class="flex items-start gap-3"><Icon name="check-circle" class="mt-0.5 h-6 w-6 shrink-0 text-brand-600" />{t('product.b1')}</li>
+        <li class="flex items-start gap-3"><Icon name="check-circle" class="mt-0.5 h-6 w-6 shrink-0 text-brand-600" />{t('product.b2')}</li>
+        <li class="flex items-start gap-3"><Icon name="check-circle" class="mt-0.5 h-6 w-6 shrink-0 text-brand-600" />{t('product.b3')}</li>
+      </ul>
+
+      <div class="mt-8 grid gap-3 sm:grid-cols-2">
+        <a href="https://www.ionnavis.com" target="_blank" rel="noopener" class="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 transition hover:border-brand-300">
+          <img src="/brand/ionnavis.svg" alt="IONNAVIS" width="36" height="36" class="h-9 w-9 shrink-0 rounded-lg" />
+          <span class="flex-1 text-sm"><span class="font-semibold text-ink-900">Business Central</span><br /><span class="text-slate-500">Partner IONNAVIS</span></span>
+          <Icon name="external" class="h-4 w-4 text-slate-400" />
+        </a>
+        <a href="https://gestioerp.com" target="_blank" rel="noopener" class="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 transition hover:border-brand-300">
+          <span class="text-sm"><span class="font-semibold text-ink-900">GestioERP</span><br /><span class="text-slate-500">SIAM Cloud</span></span>
+          <Icon name="external" class="h-4 w-4 text-slate-400" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-slate-50 py-20">
+  <div class="mx-auto max-w-3xl px-4 text-center">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">{t('cta.title')}</h2>
+    <p class="mt-4 text-lg text-slate-600">{t('cta.subtitle')}</p>
+    <a href={localizedPath('contact', locale)} class="mt-8 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-brand-600">
+      {t('cta.button')} <Icon name="arrow" class="h-5 w-5" />
+    </a>
+  </div>
+</section>

@@ -1,0 +1,83 @@
+---
+import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
+import Icon from '../Icon.astro';
+import ServiceMockup from '../ServiceMockup.astro';
+import { categories, itemsByCat, t3, type CatKey } from '../../data/services';
+
+interface Props {
+  locale: Locale;
+  cat: CatKey;
+}
+const { locale, cat: catKey } = Astro.props;
+const t = useTranslations(locale);
+const cat = categories[catKey];
+const list = itemsByCat(catKey);
+const detailPath = (slug: string) => `${localizedPath('service', locale)}/${slug}`;
+---
+<!-- HERO -->
+<section class="relative overflow-hidden bg-gradient-to-br from-ink-950 via-ink-900 to-brand-800">
+  <div class="slv-dots absolute inset-0 opacity-60"></div>
+  <div class="pointer-events-none absolute -right-32 -top-24 h-96 w-96 rounded-full bg-sky-ai-500/20 blur-3xl"></div>
+  <div class="relative mx-auto max-w-6xl px-4 py-16 sm:py-20">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div class="max-w-xl">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white backdrop-blur">
+          <Icon name={cat.icon} class="h-4 w-4 text-brand-300" />
+          {t3(cat.hero.eyebrow, locale)}
+        </span>
+        <h1 class="mt-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl">{t3(cat.hero.title, locale)}</h1>
+        <p class="mt-5 text-lg text-brand-50/85">{t3(cat.hero.subtitle, locale)}</p>
+        <div class="mt-8">
+          <a href={localizedPath('contact', locale)} class="btn-shine inline-flex items-center gap-2 rounded-lg bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-900/30 transition hover:bg-brand-400">
+            {t('cta.button')} <Icon name="arrow" class="h-5 w-5" />
+          </a>
+        </div>
+      </div>
+      <div class="reveal is-visible">
+        <ServiceMockup icon={cat.icon} class="mx-auto max-w-md lg:max-w-none" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section class="bg-white py-20">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">{t3(cat.cardsTitle, locale)}</h2>
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        list.map((item) => (
+          <a
+            href={detailPath(item.slug)}
+            class="reveal group flex flex-col rounded-2xl border border-slate-100 bg-slate-50/60 p-7 transition duration-300 hover:-translate-y-1.5 hover:border-brand-300 hover:bg-white hover:shadow-md"
+          >
+            <span class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-ink-800 text-white shadow-sm">
+              <Icon name={item.icon} class="h-6 w-6" />
+            </span>
+            <h3 class="mt-5 text-lg font-bold text-ink-900">{t3(item.title, locale)}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{t3(item.tagline, locale)}</p>
+            <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition group-hover:gap-2.5">
+              {t('svc.more')} <Icon name="arrow" class="h-4 w-4" />
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-slate-50 py-20">
+  <div class="mx-auto max-w-3xl px-4 text-center">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">{t('cta.title')}</h2>
+    <p class="mt-4 text-lg text-slate-600">{t('cta.subtitle')}</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href={localizedPath('contact', locale)} class="inline-flex items-center gap-2 rounded-lg bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-brand-600">
+        {t('cta.button')} <Icon name="arrow" class="h-5 w-5" />
+      </a>
+      <a href={localizedPath('support', locale)} class="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-7 py-3.5 text-base font-semibold text-ink-900 transition hover:border-brand-400 hover:text-brand-700">
+        <Icon name="headset" class="h-5 w-5" /> {t('nav.support')}
+      </a>
+    </div>
+  </div>
+</section>

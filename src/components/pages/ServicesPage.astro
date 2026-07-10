@@ -1,0 +1,57 @@
+---
+import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
+import Icon from '../Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const services = [
+  { k: 'erp', icon: 'cloud' },
+  { k: 'custom', icon: 'sparkles' },
+  { k: 'fito', icon: 'leaf' },
+  { k: 'cloud', icon: 'layers' },
+  { k: 'integration', icon: 'external' },
+  { k: 'support', icon: 'shield' },
+];
+---
+<!-- HEADER -->
+<section class="border-b border-slate-100 bg-gradient-to-b from-slate-50 to-white">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+    <p class="text-sm font-bold uppercase tracking-widest text-brand-600">{t('services.eyebrow')}</p>
+    <h1 class="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight text-ink-900 sm:text-5xl">{t('services.title')}</h1>
+    <p class="mt-5 max-w-2xl text-lg text-slate-600">{t('services.subtitle')}</p>
+  </div>
+</section>
+
+<!-- SERVICES GRID -->
+<section class="bg-white py-20">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        services.map((s) => (
+          <div class="reveal rounded-2xl border border-slate-100 bg-slate-50/60 p-7">
+            <span class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-ink-800 text-white shadow-sm">
+              <Icon name={s.icon} class="h-6 w-6" />
+            </span>
+            <h3 class="mt-5 text-lg font-bold text-ink-900">{t(`srv.${s.k}.t`)}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">{t(`srv.${s.k}.d`)}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-slate-50 py-20">
+  <div class="mx-auto max-w-3xl px-4 text-center">
+    <h2 class="text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">{t('cta.title')}</h2>
+    <p class="mt-4 text-lg text-slate-600">{t('cta.subtitle')}</p>
+    <a href={localizedPath('contact', locale)} class="mt-8 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-brand-600">
+      {t('cta.button')} <Icon name="arrow" class="h-5 w-5" />
+    </a>
+  </div>
+</section>

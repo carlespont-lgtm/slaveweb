@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductPage from '../../components/pages/ProductPage.astro';
+import { useTranslations } from '../../i18n/utils';
+const t = useTranslations('es');
+---
+<BaseLayout title={t('nav.product')} description={t('product.desc')}>
+  <ProductPage locale="es" />
+</BaseLayout>

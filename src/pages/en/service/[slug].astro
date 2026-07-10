@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ServiceDetail from '../../../components/pages/ServiceDetail.astro';
+import { items, t3, type Item } from '../../../data/services';
+
+export function getStaticPaths() {
+  return items.map((it) => ({ params: { slug: it.slug }, props: { item: it } }));
+}
+
+const { item } = Astro.props as { item: Item };
+---
+<BaseLayout title={t3(item.title, 'en')} description={t3(item.tagline, 'en')}>
+  <ServiceDetail locale="en" item={item} />
+</BaseLayout>

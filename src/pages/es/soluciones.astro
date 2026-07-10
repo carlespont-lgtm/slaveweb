@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CategoryOverview from '../../components/pages/CategoryOverview.astro';
+import { categories, t3 } from '../../data/services';
+---
+<BaseLayout title={t3(categories.sol.hero.eyebrow, 'es')} description={t3(categories.sol.hero.subtitle, 'es')}>
+  <CategoryOverview locale="es" cat="sol" />
+</BaseLayout>
