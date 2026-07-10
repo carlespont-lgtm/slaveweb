@@ -3,6 +3,7 @@ import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
 import Icon from '../Icon.astro';
 import BrandFamily from '../BrandFamily.astro';
 import Partners from '../Partners.astro';
+import { itemsByCat, accentOf, t3 } from '../../data/services';
 
 interface Props {
   locale: Locale;
@@ -10,6 +11,9 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const chMock = `/mockups/control-horari${locale === 'ca' ? '-ca' : locale === 'en' ? '-en' : ''}.svg`;
+
+const servItems = itemsByCat('serv');
+const svcPath = (slug: string) => `${localizedPath('service', locale)}/${slug}`;
 
 const stats = [
   { k: 'years', count: 15, prefix: '+' },
@@ -27,19 +31,10 @@ const modules = [
 ];
 
 const maintenance = [
-  { k: '1', icon: 'server' },
-  { k: '2', icon: 'network' },
-  { k: '3', icon: 'phone' },
-  { k: '4', icon: 'wifi' },
-];
-
-const services = [
-  { k: 'erp', icon: 'cloud' },
-  { k: 'custom', icon: 'sparkles' },
-  { k: 'fito', icon: 'leaf' },
-  { k: 'cloud', icon: 'layers' },
-  { k: 'integration', icon: 'external' },
-  { k: 'support', icon: 'shield' },
+  { k: '1', icon: 'server', slug: 'contracte-manteniment' },
+  { k: '2', icon: 'network', slug: 'servidors' },
+  { k: '3', icon: 'phone', slug: 'telefonia-voip' },
+  { k: '4', icon: 'wifi', slug: 'wifi-professional' },
 ];
 ---
 <!-- HERO -->
@@ -121,14 +116,20 @@ const services = [
 
     <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
-        services.map((s) => (
-          <div class="reveal group rounded-2xl border border-slate-100 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-            <span class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-ink-800 text-white shadow-sm">
-              <Icon name={s.icon} class="h-6 w-6" />
+        servItems.map((item) => (
+          <a
+            href={svcPath(item.slug)}
+            class="reveal group flex flex-col rounded-2xl border border-slate-100 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-md"
+          >
+            <span class="grid h-12 w-12 place-items-center rounded-xl text-white shadow-sm" style={`background:linear-gradient(135deg, ${accentOf(item.slug).from}, ${accentOf(item.slug).to})`}>
+              <Icon name={item.icon} class="h-6 w-6" />
             </span>
-            <h3 class="mt-5 text-lg font-bold text-ink-900">{t(`srv.${s.k}.t`)}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-600">{t(`srv.${s.k}.d`)}</p>
-          </div>
+            <h3 class="mt-5 text-lg font-bold text-ink-900">{t3(item.title, locale)}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{t3(item.tagline, locale)}</p>
+            <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold transition group-hover:gap-2.5" style={`color:${accentOf(item.slug).text}`}>
+              {t('svc.more')} <Icon name="arrow" class="h-4 w-4" />
+            </span>
+          </a>
         ))
       }
     </div>
@@ -148,13 +149,19 @@ const services = [
     <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {
         maintenance.map((m) => (
-          <div class="reveal rounded-2xl border border-white/15 bg-white/5 p-7 backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:border-white/25 hover:bg-white/10">
-            <span class="grid h-12 w-12 place-items-center rounded-xl bg-white/10 text-brand-300">
+          <a
+            href={svcPath(m.slug)}
+            class="reveal group rounded-2xl border border-white/15 bg-white/5 p-7 backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:border-white/25 hover:bg-white/10"
+          >
+            <span class="grid h-12 w-12 place-items-center rounded-xl bg-white/10" style={`color:${accentOf(m.slug).from}`}>
               <Icon name={m.icon} class="h-6 w-6" />
             </span>
             <h3 class="mt-5 text-lg font-bold text-white">{t(`mnt.${m.k}.t`)}</h3>
             <p class="mt-2 text-sm leading-relaxed text-brand-50/70">{t(`mnt.${m.k}.d`)}</p>
-          </div>
+            <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white transition group-hover:gap-2.5">
+              {t('svc.more')} <Icon name="arrow" class="h-4 w-4" />
+            </span>
+          </a>
         ))
       }
     </div>

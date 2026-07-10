@@ -1,9 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ServicesPage from '../components/pages/ServicesPage.astro';
-import { useTranslations } from '../i18n/utils';
-const t = useTranslations('ca');
+import CategoryOverview from '../components/pages/CategoryOverview.astro';
+import { categories, t3 } from '../data/services';
 ---
-<BaseLayout title={t('nav.services')} description={t('services.subtitle')}>
-  <ServicesPage locale="ca" />
+<BaseLayout title={t3(categories.serv.hero.eyebrow, 'ca')} description={t3(categories.serv.hero.subtitle, 'ca')}>
+  <CategoryOverview locale="ca" cat="serv" />
 </BaseLayout>

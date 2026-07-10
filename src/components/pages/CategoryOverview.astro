@@ -2,7 +2,7 @@
 import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
 import Icon from '../Icon.astro';
 import ServiceMockup from '../ServiceMockup.astro';
-import { categories, itemsByCat, t3, type CatKey } from '../../data/services';
+import { categories, itemsByCat, accentColors, accentOf, t3, type CatKey } from '../../data/services';
 
 interface Props {
   locale: Locale;
@@ -13,6 +13,8 @@ const t = useTranslations(locale);
 const cat = categories[catKey];
 const list = itemsByCat(catKey);
 const detailPath = (slug: string) => `${localizedPath('service', locale)}/${slug}`;
+const catAccentKey: Record<CatKey, string> = { serv: 'emerald', mant: 'blue', sol: 'cyan', nuvol: 'teal' };
+const catA = accentColors[catAccentKey[catKey]];
 ---
 <!-- HERO -->
 <section class="relative overflow-hidden bg-gradient-to-br from-ink-950 via-ink-900 to-brand-800">
@@ -34,7 +36,7 @@ const detailPath = (slug: string) => `${localizedPath('service', locale)}/${slug
         </div>
       </div>
       <div class="reveal is-visible">
-        <ServiceMockup icon={cat.icon} class="mx-auto max-w-md lg:max-w-none" />
+        <ServiceMockup icon={cat.icon} accent={catA} class="mx-auto max-w-md lg:max-w-none" />
       </div>
     </div>
   </div>
@@ -51,12 +53,12 @@ const detailPath = (slug: string) => `${localizedPath('service', locale)}/${slug
             href={detailPath(item.slug)}
             class="reveal group flex flex-col rounded-2xl border border-slate-100 bg-slate-50/60 p-7 transition duration-300 hover:-translate-y-1.5 hover:border-brand-300 hover:bg-white hover:shadow-md"
           >
-            <span class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-ink-800 text-white shadow-sm">
+            <span class="grid h-12 w-12 place-items-center rounded-xl text-white shadow-sm" style={`background:linear-gradient(135deg, ${accentOf(item.slug).from}, ${accentOf(item.slug).to})`}>
               <Icon name={item.icon} class="h-6 w-6" />
             </span>
             <h3 class="mt-5 text-lg font-bold text-ink-900">{t3(item.title, locale)}</h3>
             <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{t3(item.tagline, locale)}</p>
-            <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition group-hover:gap-2.5">
+            <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold transition group-hover:gap-2.5" style={`color:${accentOf(item.slug).text}`}>
               {t('svc.more')} <Icon name="arrow" class="h-4 w-4" />
             </span>
           </a>

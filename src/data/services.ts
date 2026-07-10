@@ -3,7 +3,38 @@ import type { Locale } from '../i18n/utils';
 type L = Record<Locale, string>;
 export const t3 = (o: L, l: Locale): string => o[l] ?? o.ca;
 
-export type CatKey = 'mant' | 'sol' | 'nuvol';
+export type CatKey = 'serv' | 'mant' | 'sol' | 'nuvol';
+
+export interface Accent { from: string; to: string; soft: string; text: string; }
+export const accentColors: Record<string, Accent> = {
+  emerald: { from: '#34d39e', to: '#0c7d68', soft: '#d0fbe7', text: '#0c7d68' },
+  blue: { from: '#60a5fa', to: '#1d4ed8', soft: '#dbeafe', text: '#1d4ed8' },
+  indigo: { from: '#818cf8', to: '#4338ca', soft: '#e0e7ff', text: '#4338ca' },
+  violet: { from: '#c084fc', to: '#7c3aed', soft: '#f3e8ff', text: '#7c3aed' },
+  pink: { from: '#f472b6', to: '#be185d', soft: '#fce7f3', text: '#be185d' },
+  amber: { from: '#fbbf24', to: '#d97706', soft: '#fef3c7', text: '#b45309' },
+  orange: { from: '#fb923c', to: '#c2410c', soft: '#ffedd5', text: '#c2410c' },
+  teal: { from: '#2dd4bf', to: '#0f766e', soft: '#ccfbf1', text: '#0f766e' },
+  cyan: { from: '#22d3ee', to: '#0e7490', soft: '#cffafe', text: '#0e7490' },
+  lime: { from: '#a3e635', to: '#4d7c0f', soft: '#ecfccb', text: '#4d7c0f' },
+  red: { from: '#f87171', to: '#b91c1c', soft: '#fee2e2', text: '#b91c1c' },
+  sky: { from: '#38bdf8', to: '#0369a1', soft: '#e0f2fe', text: '#0369a1' },
+};
+const slugAccent: Record<string, string> = {
+  // serveis
+  'gestio-erp': 'emerald', 'desenvolupament-mida': 'violet', 'fitoware-vivers': 'lime',
+  'migracio-nuvol': 'sky', integracions: 'indigo', 'suport-manteniment': 'amber',
+  // manteniment
+  'contracte-manteniment': 'blue', 'banc-hores': 'amber', 'servei-tecnic': 'orange',
+  'cost-copia': 'teal', garanties: 'emerald', 'recuperacio-dades': 'red',
+  // solucions
+  'programari-gestio': 'emerald', 'wifi-professional': 'cyan', 'vpn-ciberseguretat': 'indigo',
+  servidors: 'blue', 'impressores-3d': 'orange', 'productes-botiga': 'pink',
+  // núvol
+  'telefonia-voip': 'teal', 'backup-online': 'sky', 'office-365': 'red',
+  'dropbox-business': 'blue', antivirus: 'violet', 'kit-digital': 'amber',
+};
+export const accentOf = (slug: string): Accent => accentColors[slugAccent[slug]] ?? accentColors.emerald;
 
 export interface Item {
   slug: string;
@@ -27,6 +58,18 @@ export interface Category {
 const two = (ca: string, es: string, en: string): L => ({ ca, es, en });
 
 export const categories: Record<CatKey, Category> = {
+  serv: {
+    key: 'serv', icon: 'sparkles', segment: 'services',
+    hero: {
+      eyebrow: two('Serveis', 'Servicios', 'Services'),
+      title: two('El que fem per la teva empresa', 'Lo que hacemos por tu empresa', 'What we do for your company'),
+      subtitle: two(
+        "De la implantació d'un ERP al núvol al desenvolupament a mida quan cap programa estàndard encaixa.",
+        'De la implantación de un ERP en la nube al desarrollo a medida cuando ningún programa estándar encaja.',
+        'From deploying a cloud ERP to custom development when no standard program fits.'),
+    },
+    cardsTitle: two('Els nostres serveis', 'Nuestros servicios', 'Our services'),
+  },
   mant: {
     key: 'mant', icon: 'wrench', segment: 'maintenance',
     hero: {
@@ -66,6 +109,98 @@ export const categories: Record<CatKey, Category> = {
 };
 
 export const items: Item[] = [
+  // ---------- SERVEIS ----------
+  {
+    slug: 'gestio-erp', cat: 'serv', icon: 'cloud',
+    title: two('Programari de gestió (ERP)', 'Software de gestión (ERP)', 'Management software (ERP)'),
+    tagline: two('GestioERP: facturació, TPV, comptabilitat i magatzem al núvol.', 'GestioERP: facturación, TPV, contabilidad y almacén en la nube.', 'GestioERP: invoicing, POS, accounting and warehouse in the cloud.'),
+    intro: two(
+      'Implantem GestioERP: facturació, TPV, comptabilitat, magatzem i CRM en un sol sistema, al núvol i modular. Actives només el que fas servir i pagues només per això.',
+      'Implantamos GestioERP: facturación, TPV, contabilidad, almacén y CRM en un solo sistema, en la nube y modular. Activas solo lo que usas y pagas solo por eso.',
+      'We deploy GestioERP: invoicing, POS, accounting, warehouse and CRM in a single, modular cloud system. Switch on only what you use and pay only for that.'),
+    features: [
+      two('Facturació i comptabilitat', 'Facturación y contabilidad', 'Invoicing and accounting'),
+      two('TPV i magatzem', 'TPV y almacén', 'POS and warehouse'),
+      two('CRM i control horari', 'CRM y control horario', 'CRM and time tracking'),
+      two('Modular i al núvol', 'Modular y en la nube', 'Modular and cloud-based'),
+    ],
+  },
+  {
+    slug: 'desenvolupament-mida', cat: 'serv', icon: 'sparkles',
+    title: two('Desenvolupament a mida', 'Desarrollo a medida', 'Custom development'),
+    tagline: two("Quan el problema no cap en cap programa estàndard, el desenvolupem.", 'Cuando el problema no cabe en ningún programa estándar, lo desarrollamos.', 'When the problem fits no standard program, we build it.'),
+    intro: two(
+      "Anys d'experiència resolent problemes reals: web, apps Android i iOS, back-office i integracions. Si el teu cas no encaixa en cap programa estàndard, el desenvolupem a la teva mida.",
+      'Años de experiencia resolviendo problemas reales: web, apps Android e iOS, back-office e integraciones. Si tu caso no encaja en ningún programa estándar, lo desarrollamos a tu medida.',
+      'Years of experience solving real problems: web, Android and iOS apps, back-office and integrations. If your case fits no standard program, we build it to your measure.'),
+    features: [
+      two('Web i portals a mida', 'Web y portales a medida', 'Custom web and portals'),
+      two('Apps Android i iOS', 'Apps Android e iOS', 'Android and iOS apps'),
+      two('Back-office i automatismes', 'Back-office y automatismos', 'Back-office and automation'),
+      two('Integracions amb els teus sistemes', 'Integraciones con tus sistemas', 'Integrations with your systems'),
+    ],
+  },
+  {
+    slug: 'fitoware-vivers', cat: 'serv', icon: 'leaf',
+    title: two('Fitoware per a vivers', 'Fitoware para viveros', 'Fitoware for nurseries'),
+    tagline: two('Producte propi: passaport fitosanitari europeu i traçabilitat.', 'Producto propio: pasaporte fitosanitario europeo y trazabilidad.', 'Our own product: European plant passport and traceability.'),
+    intro: two(
+      'Fitoware és el nostre producte propi per a vivers i planta ornamental: catàleg d\'espècies, passaport fitosanitari europeu (Reglament UE 2016/2031) i traçabilitat, en dues edicions (GestioERP i Microsoft Dynamics 365).',
+      'Fitoware es nuestro producto propio para viveros y planta ornamental: catálogo de especies, pasaporte fitosanitario europeo (Reglamento UE 2016/2031) y trazabilidad, en dos ediciones (GestioERP y Microsoft Dynamics 365).',
+      'Fitoware is our own product for nurseries and ornamental plants: species catalogue, European plant passport (EU Regulation 2016/2031) and traceability, in two editions (GestioERP and Microsoft Dynamics 365).'),
+    features: [
+      two("Catàleg d'espècies botàniques", 'Catálogo de especies botánicas', 'Botanical species catalogue'),
+      two('Passaport fitosanitari en un clic', 'Pasaporte fitosanitario en un clic', 'Plant passport in one click'),
+      two('Traçabilitat i etiquetes', 'Trazabilidad y etiquetas', 'Traceability and labels'),
+      two('Dues edicions: GestioERP i Dynamics 365', 'Dos ediciones: GestioERP y Dynamics 365', 'Two editions: GestioERP and Dynamics 365'),
+    ],
+    external: 'https://fitoware.com',
+  },
+  {
+    slug: 'migracio-nuvol', cat: 'serv', icon: 'layers',
+    title: two('Migració al núvol', 'Migración a la nube', 'Cloud migration'),
+    tagline: two('Del servidor del despatx al navegador, sense complicacions.', 'Del servidor del despacho al navegador, sin complicaciones.', 'From the office server to the browser, hassle-free.'),
+    intro: two(
+      "Movem la teva empresa al núvol: deixes de comprar maquinari, de fer còpies de seguretat a mà i de dependre d'un servidor al despatx. Migració sense pèrdua de dades i amb formació per a l'equip.",
+      'Movemos tu empresa a la nube: dejas de comprar hardware, de hacer copias de seguridad a mano y de depender de un servidor en el despacho. Migración sin pérdida de datos y con formación para el equipo.',
+      'We move your company to the cloud: no more buying hardware, backing up by hand or depending on an office server. Loss-free migration with team training.'),
+    features: [
+      two('Sense comprar maquinari', 'Sin comprar hardware', 'No hardware to buy'),
+      two('Còpies de seguretat automàtiques', 'Copias de seguridad automáticas', 'Automatic backups'),
+      two('Accés des de qualsevol lloc', 'Acceso desde cualquier lugar', 'Access from anywhere'),
+      two('Migració sense pèrdua de dades', 'Migración sin pérdida de datos', 'Loss-free migration'),
+    ],
+  },
+  {
+    slug: 'integracions', cat: 'serv', icon: 'external',
+    title: two('Integracions', 'Integraciones', 'Integrations'),
+    tagline: two('Connectem els teus sistemes: Dynamics 365, APIs i pagaments.', 'Conectamos tus sistemas: Dynamics 365, APIs y pagos.', 'We connect your systems: Dynamics 365, APIs and payments.'),
+    intro: two(
+      'Connectem el teu programari de gestió amb la resta de sistemes: Microsoft Dynamics 365 Business Central, APIs de tercers, passarel·les de pagament, facturació electrònica i botigues online.',
+      'Conectamos tu software de gestión con el resto de sistemas: Microsoft Dynamics 365 Business Central, APIs de terceros, pasarelas de pago, facturación electrónica y tiendas online.',
+      'We connect your management software with the rest of your systems: Microsoft Dynamics 365 Business Central, third-party APIs, payment gateways, e-invoicing and online stores.'),
+    features: [
+      two('Microsoft Dynamics 365 Business Central', 'Microsoft Dynamics 365 Business Central', 'Microsoft Dynamics 365 Business Central'),
+      two('APIs i serveis de tercers', 'APIs y servicios de terceros', 'Third-party APIs and services'),
+      two('Passarel·les de pagament', 'Pasarelas de pago', 'Payment gateways'),
+      two('Facturació electrònica', 'Facturación electrónica', 'E-invoicing'),
+    ],
+  },
+  {
+    slug: 'suport-manteniment', cat: 'serv', icon: 'shield',
+    title: two('Suport i manteniment', 'Soporte y mantenimiento', 'Support & maintenance'),
+    tagline: two('Acompanyament continu: actualitzacions, còpies i suport.', 'Acompañamiento continuo: actualizaciones, copias y soporte.', 'Ongoing support: updates, backups and help.'),
+    intro: two(
+      "T'acompanyem cada dia: actualitzacions, còpies de seguretat, servei tècnic in situ i remot i assistència remota amb Supremo i AnyDesk, perquè tu t'ocupis del teu negoci.",
+      'Te acompañamos cada día: actualizaciones, copias de seguridad, servicio técnico in situ y remoto y asistencia remota con Supremo y AnyDesk, para que tú te ocupes de tu negocio.',
+      'We support you every day: updates, backups, on-site and remote technical service and remote assistance with Supremo and AnyDesk, so you can focus on your business.'),
+    features: [
+      two('Actualitzacions i còpies de seguretat', 'Actualizaciones y copias de seguridad', 'Updates and backups'),
+      two('Servei tècnic in situ i remot', 'Servicio técnico in situ y remoto', 'On-site and remote technical service'),
+      two('Assistència remota (Supremo/AnyDesk)', 'Asistencia remota (Supremo/AnyDesk)', 'Remote assistance (Supremo/AnyDesk)'),
+      two('Plans de manteniment a mida', 'Planes de mantenimiento a medida', 'Custom maintenance plans'),
+    ],
+  },
   // ---------- MANTENIMENT ----------
   {
     slug: 'contracte-manteniment', cat: 'mant', icon: 'file-text',
