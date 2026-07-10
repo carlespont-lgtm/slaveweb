@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NewsPost from '../../../components/pages/NewsPost.astro';
+import { posts, t3n, type Post } from '../../../data/news';
+
+export function getStaticPaths() {
+  return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
+}
+
+const { post } = Astro.props as { post: Post };
+---
+<BaseLayout title={t3n(post.title, 'en')} description={t3n(post.excerpt, 'en')}>
+  <NewsPost locale="en" post={post} />
+</BaseLayout>

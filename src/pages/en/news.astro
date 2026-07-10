@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsPage from '../../components/pages/NewsPage.astro';
+import { useTranslations } from '../../i18n/utils';
+const t = useTranslations('en');
+---
+<BaseLayout title={t('news.title')} description={t('news.subtitle')}>
+  <NewsPage locale="en" />
+</BaseLayout>

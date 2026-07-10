@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import KitDigitalPage from '../../components/pages/KitDigitalPage.astro';
+import { kdHero, t3k } from '../../data/kitdigital';
+---
+<BaseLayout title={t3k(kdHero.eyebrow, 'en')} description={t3k(kdHero.subtitle, 'en')}>
+  <KitDigitalPage locale="en" />
+</BaseLayout>

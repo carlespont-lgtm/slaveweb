@@ -1,0 +1,52 @@
+---
+import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
+import Icon from '../Icon.astro';
+import { type Post, t3n } from '../../data/news';
+
+interface Props {
+  locale: Locale;
+  post: Post;
+}
+const { locale, post } = Astro.props;
+const t = useTranslations(locale);
+const fmtDate = (iso: string) => {
+  const [y, m, d] = iso.split('-');
+  return `${d}/${m}/${y}`;
+};
+const isExternal = post.link && /^https?:/.test(post.link.href);
+const linkHref = post.link
+  ? isExternal
+    ? post.link.href
+    : post.link.href.startsWith('/servei/') || post.link.href === '/kit-digital'
+      ? post.link.href
+      : post.link.href
+  : '#';
+---
+<article class="bg-white py-16 sm:py-20">
+  <div class="mx-auto max-w-3xl px-4">
+    <a href={localizedPath('news', locale)} class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition hover:gap-2.5">
+      ← {t('news.back')}
+    </a>
+    <div class="mt-6 flex items-center gap-2 text-xs font-semibold">
+      <span class="rounded-full bg-brand-100 px-2.5 py-1 text-brand-700">{t3n(post.tag, locale)}</span>
+      <time class="text-slate-400">{fmtDate(post.date)}</time>
+    </div>
+    <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">{t3n(post.title, locale)}</h1>
+    <p class="mt-4 text-lg leading-relaxed text-slate-600">{t3n(post.excerpt, locale)}</p>
+    <div class="mt-8 space-y-5 text-slate-700">
+      {post.body.map((par) => <p class="leading-relaxed">{t3n(par, locale)}</p>)}
+    </div>
+    {
+      post.link && (
+        <a
+          href={linkHref}
+          target={isExternal ? '_blank' : undefined}
+          rel={isExternal ? 'noopener' : undefined}
+          class="mt-8 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-600"
+        >
+          {t3n(post.link.label, locale)} <Icon name="arrow" class="h-4 w-4" />
+        </a>
+      )
+    }
+  </div>
+</article>
