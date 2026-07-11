@@ -94,21 +94,14 @@ body {
   display: flex;
   width: max-content;
   align-items: center;
+  animation: slv-marquee 34s linear infinite;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .marquee__track {
-    animation: slv-marquee 34s linear infinite;
-  }
-  .marquee:hover .marquee__track {
-    animation-play-state: paused;
-  }
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
 }
 @keyframes slv-marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee { overflow-x: auto; }
 }
 
 /* Reflex daurat als botons principals */

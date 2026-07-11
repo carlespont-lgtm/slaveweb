@@ -45,7 +45,7 @@ const dropdownCls = 'invisible absolute top-full z-50 translate-y-1 pt-3 opacity
 const viewAllCls = 'mt-1 flex items-center justify-between rounded-xl bg-slate-50 px-4 py-2.5 text-sm font-semibold text-brand-700 transition hover:bg-brand-50';
 ---
 <header class="sticky top-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur">
-  <nav class="mx-auto flex h-20 max-w-7xl items-center justify-between gap-2 px-4">
+  <nav class="relative mx-auto flex h-20 max-w-7xl items-center justify-between gap-2 px-4">
     <a href={home} class="shrink-0" aria-label="Slave Computers">
       <Logo size="lg" />
     </a>
@@ -55,14 +55,14 @@ const viewAllCls = 'mt-1 flex items-center justify-between rounded-xl bg-slate-5
         <a href={home} class="rounded-md px-1.5 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-brand-700 2xl:px-2.5">{t('nav.home')}</a>
       </li>
       {
-        hubs.map((h, hi) => (
-          <li class="group relative">
+        hubs.map((h) => (
+          <li class="group">
             <a href={localizedPath(h.seg, locale)} class={triggerCls}>
               {h.label}
               <Icon name="chevron-down" class="h-3.5 w-3.5 transition duration-200 group-hover:rotate-180" />
             </a>
-            <div class:list={[dropdownCls, hi >= 2 ? 'right-0' : 'left-0']}>
-              <div class="w-[56rem] max-w-[calc(100vw-2rem)] rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl">
+            <div class:list={[dropdownCls, 'inset-x-0']}>
+              <div class="mx-auto w-[56rem] max-w-[calc(100vw-2rem)] rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl">
                 <div class="grid grid-cols-1 gap-4 xl:grid-cols-[1fr_26rem]">
                   <div>
                     <div class="grid grid-cols-2 gap-1">
