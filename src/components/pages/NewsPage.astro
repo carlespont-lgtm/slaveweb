@@ -1,7 +1,8 @@
 ---
 import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
 import Icon from '../Icon.astro';
-import { latest, t3n } from '../../data/news';
+import Illustration from '../Illustration.astro';
+import { latest, t3n, illoOf } from '../../data/news';
 
 interface Props {
   locale: Locale;
@@ -27,16 +28,21 @@ const fmtDate = (iso: string) => {
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
         latest.map((p) => (
-          <a href={newsPath(p.slug)} class="reveal group flex flex-col rounded-2xl border border-slate-100 bg-slate-50/60 p-7 transition duration-300 hover:-translate-y-1.5 hover:border-brand-300 hover:bg-white hover:shadow-md">
-            <div class="flex items-center gap-2 text-xs font-semibold">
-              <span class="rounded-full bg-brand-100 px-2.5 py-1 text-brand-700">{t3n(p.tag, locale)}</span>
-              <time class="text-slate-400">{fmtDate(p.date)}</time>
-            </div>
-            <h3 class="mt-4 text-lg font-bold leading-snug text-ink-900">{t3n(p.title, locale)}</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{t3n(p.excerpt, locale)}</p>
-            <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition group-hover:gap-2.5">
-              {t('news.readmore')} <Icon name="arrow" class="h-4 w-4" />
+          <a href={newsPath(p.slug)} class="reveal group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-slate-50/60 transition duration-300 hover:-translate-y-1.5 hover:border-brand-300 hover:bg-white hover:shadow-md">
+            <span class="block overflow-hidden border-b border-slate-100">
+              <Illustration name={illoOf(p.slug)} class="transition duration-500 group-hover:scale-105" />
             </span>
+            <div class="flex flex-1 flex-col p-7 pt-6">
+              <div class="flex items-center gap-2 text-xs font-semibold">
+                <span class="rounded-full bg-brand-100 px-2.5 py-1 text-brand-700">{t3n(p.tag, locale)}</span>
+                <time class="text-slate-400">{fmtDate(p.date)}</time>
+              </div>
+              <h3 class="mt-4 text-lg font-bold leading-snug text-ink-900">{t3n(p.title, locale)}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{t3n(p.excerpt, locale)}</p>
+              <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition group-hover:gap-2.5">
+                {t('news.readmore')} <Icon name="arrow" class="h-4 w-4" />
+              </span>
+            </div>
           </a>
         ))
       }

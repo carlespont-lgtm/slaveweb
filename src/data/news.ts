@@ -107,3 +107,13 @@ export const postVisual: Record<string, { icon: string; from: string; to: string
 };
 export const visualOf = (slug: string): { icon: string; from: string; to: string } =>
   postVisual[slug] ?? { icon: 'bell', from: '#34d39e', to: '#0c7d68' };
+
+// Il·lustració de colors (component Illustration) per a cada notícia
+const postIllo: Record<string, string> = {
+  'slave-grup-siamcloud': 'team',
+  'gestioerp-verifactu': 'dashboard',
+  'wifi-hotels-unifi': 'wifi',
+  'telefonia-voip-estalvi': 'phone',
+  'fitoware-passaport': 'files',
+};
+export const illoOf = (slug: string): string => postIllo[slug] ?? 'dashboard';

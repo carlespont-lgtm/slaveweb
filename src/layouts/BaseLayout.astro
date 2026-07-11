@@ -81,6 +81,14 @@ const orgSchema = {
     <ClientRouter />
   </head>
   <body class="flex min-h-screen flex-col bg-white">
+    <!-- Barra de progrés de lectura (scroll) -->
+    <div
+      id="scroll-progress"
+      transition:persist
+      class="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-gradient-to-r from-brand-600 via-brand-400 to-gold-400"
+      style="transform:scaleX(0)"
+      aria-hidden="true"
+    ></div>
     <Header locale={locale} />
     <main class="flex-1">
       <slot />
@@ -88,6 +96,30 @@ const orgSchema = {
     <Footer locale={locale} />
     <WhatsAppWidget locale={locale} />
     <CookieConsent locale={locale} />
+
+    <script is:inline>
+      (function () {
+        // Barra de progrés de scroll — el listener es lliga una sola vega i sobreviu
+        // a la navegació per View Transitions (consulta l'element fresc a cada crida).
+        function updateProgress() {
+          var bar = document.getElementById('scroll-progress');
+          if (!bar) return;
+          var h = document.documentElement;
+          var max = h.scrollHeight - h.clientHeight;
+          var p = max > 0 ? (h.scrollTop || document.body.scrollTop) / max : 0;
+          bar.style.transform = 'scaleX(' + Math.min(1, Math.max(0, p)) + ')';
+        }
+        if (!window.__spBound) {
+          window.__spBound = true;
+          window.addEventListener('scroll', updateProgress, { passive: true });
+          window.addEventListener('resize', updateProgress);
+          document.addEventListener('astro:after-swap', updateProgress);
+        }
+        document.addEventListener('astro:page-load', updateProgress);
+        if (document.readyState !== 'loading') updateProgress();
+        else document.addEventListener('DOMContentLoaded', updateProgress);
+      })();
+    </script>
 
     <script is:inline>
       (function () {

@@ -32,7 +32,7 @@ const slugAccent: Record<string, string> = {
   servidors: 'blue', 'impressores-3d': 'orange', 'productes-botiga': 'pink',
   // núvol
   'telefonia-voip': 'teal', 'backup-online': 'sky', 'office-365': 'red',
-  'dropbox-business': 'blue', antivirus: 'violet', 'kit-digital': 'amber',
+  'dropbox-business': 'blue', antivirus: 'violet',
 };
 export const accentOf = (slug: string): Accent => accentColors[slugAccent[slug]] ?? accentColors.emerald;
 
@@ -457,21 +457,6 @@ export const items: Item[] = [
       two('Consola centralitzada', 'Consola centralizada', 'Centralised console'),
       two('Actualitzacions automàtiques', 'Actualizaciones automáticas', 'Automatic updates'),
       two('Per a PC, Mac i mòbils', 'Para PC, Mac y móviles', 'For PC, Mac and mobile'),
-    ],
-  },
-  {
-    slug: 'kit-digital', cat: 'nuvol', icon: 'sparkles',
-    title: two('Digitalitzem-nos! (Kit Digital)', '¡Digitalicémonos! (Kit Digital)', 'Let’s go digital! (Kit Digital)'),
-    tagline: two("T'acompanyem en el salt al núvol amb el Kit Digital.", 'Te acompañamos en el salto a la nube con el Kit Digital.', 'We guide your leap to the cloud with the Kit Digital.'),
-    intro: two(
-      "Som agents digitalitzadors: t'ajudem a aprofitar les ajudes del Kit Digital per digitalitzar la teva empresa —web, gestió, ciberseguretat i comunicacions— amb tota la tramitació inclosa.",
-      'Somos agentes digitalizadores: te ayudamos a aprovechar las ayudas del Kit Digital para digitalizar tu empresa —web, gestión, ciberseguridad y comunicaciones— con toda la tramitación incluida.',
-      'We are digitalisation agents: we help you use Kit Digital grants to digitalise your company —web, management, cybersecurity and communications— with all the paperwork included.'),
-    features: [
-      two('Assessorament de subvencions', 'Asesoramiento de subvenciones', 'Grant advice'),
-      two('Tramitació inclosa', 'Tramitación incluida', 'Paperwork included'),
-      two('Web, gestió i ciberseguretat', 'Web, gestión y ciberseguridad', 'Web, management and cybersecurity'),
-      two('Acompanyament complet', 'Acompañamiento completo', 'Full support throughout'),
     ],
   },
 ];

@@ -13,7 +13,8 @@ const { locale, cat: catKey } = Astro.props;
 const t = useTranslations(locale);
 const cat = categories[catKey];
 const list = itemsByCat(catKey);
-const detailPath = (slug: string) => `${localizedPath('service', locale)}/${slug}`;
+const detailPath = (slug: string) =>
+  slug === 'fitoware-vivers' ? localizedPath('product', locale) : `${localizedPath('service', locale)}/${slug}`;
 const catAccentKey: Record<CatKey, string> = { serv: 'emerald', mant: 'blue', sol: 'cyan', nuvol: 'teal' };
 const catA = accentColors[catAccentKey[catKey]];
 ---
