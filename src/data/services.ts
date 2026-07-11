@@ -62,6 +62,7 @@ export interface Item {
   tagline: L;
   intro: L;
   features: L[];
+  body?: L[]; // paràgrafs de text explicatiu addicional (opcional)
   external?: string;
 }
 
@@ -340,6 +341,20 @@ export const items: Item[] = [
       two("Xarxa d'hostes amb portal captiu (hotels)", 'Red de invitados con portal cautivo (hoteles)', 'Guest network with captive portal (hotels)'),
       two('Gestió centralitzada i monitoratge', 'Gestión centralizada y monitorización', 'Centralised management and monitoring'),
     ],
+    body: [
+      two(
+        "La majoria de problemes de WiFi a les empreses no es resolen posant més routers, sinó amb un bon disseny. Comencem sempre amb un estudi de cobertura (site survey) sobre el plànol del local per detectar zones mortes, interferències i saturació de canals, i decidir quants punts d'accés calen i on col·locar-los. Així evitem talls, zones sense senyal i les típiques queixes de \"aquí no arriba el WiFi\".",
+        'La mayoría de problemas de WiFi en las empresas no se resuelven poniendo más routers, sino con un buen diseño. Empezamos siempre con un estudio de cobertura (site survey) sobre el plano del local para detectar zonas muertas, interferencias y saturación de canales, y decidir cuántos puntos de acceso hacen falta y dónde colocarlos. Así evitamos cortes, zonas sin señal y las típicas quejas de "aquí no llega el WiFi".',
+        'Most business WiFi problems are not solved by adding more routers, but with good design. We always start with a coverage survey (site survey) over the floor plan to detect dead zones, interference and channel saturation, and to decide how many access points are needed and where to place them. This avoids drop-outs, no-signal areas and the typical "there\'s no WiFi here" complaints.'),
+      two(
+        "Treballem amb equips professionals Ubiquiti UniFi, tant per a interior com per a exterior (naus, terrasses, aparcaments). Tots els punts d'accés es gestionen des d'un únic controlador: es veuen els clients connectats, el consum, la salut de la xarxa i s'apliquen canvis a tots els equips alhora. El roaming és transparent: el mòbil o el portàtil salta d'un punt d'accés a un altre sense tallar la trucada ni la videoconferència.",
+        'Trabajamos con equipos profesionales Ubiquiti UniFi, tanto de interior como de exterior (naves, terrazas, aparcamientos). Todos los puntos de acceso se gestionan desde un único controlador: se ven los clientes conectados, el consumo, la salud de la red y se aplican cambios a todos los equipos a la vez. El roaming es transparente: el móvil o el portátil salta de un punto de acceso a otro sin cortar la llamada ni la videoconferencia.',
+        'We work with professional Ubiquiti UniFi equipment, both indoor and outdoor (warehouses, terraces, car parks). All access points are managed from a single controller: you can see connected clients, usage, network health and push changes to every device at once. Roaming is seamless: the phone or laptop jumps from one access point to another without dropping the call or video conference.'),
+      two(
+        "Separem la xarxa interna de l'empresa de la xarxa d'hostes, imprescindible en hotels, restaurants, clíniques i oficines que reben visites. Els convidats naveguen amb un portal captiu (amb el teu logotip, condicions d'ús i, si vols, registre) i límits de velocitat, sense accedir mai als teus servidors ni als teus dispositius. Ho monitorem de manera contínua i, amb un contracte de manteniment, actuem abans que el problema afecti el teu negoci.",
+        'Separamos la red interna de la empresa de la red de invitados, imprescindible en hoteles, restaurantes, clínicas y oficinas que reciben visitas. Los invitados navegan con un portal cautivo (con tu logotipo, condiciones de uso y, si quieres, registro) y límites de velocidad, sin acceder nunca a tus servidores ni a tus dispositivos. Lo monitorizamos de forma continua y, con un contrato de mantenimiento, actuamos antes de que el problema afecte a tu negocio.',
+        'We separate the company\'s internal network from the guest network, essential in hotels, restaurants, clinics and offices that receive visitors. Guests browse through a captive portal (with your logo, terms of use and, if you want, sign-up) and speed limits, never reaching your servers or devices. We monitor it continuously and, with a maintenance contract, we act before the problem affects your business.'),
+    ],
   },
   {
     slug: 'vpn-ciberseguretat', cat: 'sol', icon: 'lock',
@@ -354,6 +369,20 @@ export const items: Item[] = [
       two('Tallafocs i segmentació', 'Cortafuegos y segmentación', 'Firewall and segmentation'),
       two('Protecció davant ransomware', 'Protección ante ransomware', 'Ransomware protection'),
       two('Auditoria i bones pràctiques', 'Auditoría y buenas prácticas', 'Audit and best practices'),
+    ],
+    body: [
+      two(
+        "La ciberseguretat d'una empresa no és un únic producte, sinó diverses capes que treballen juntes. Comencem per protegir la porta d'entrada amb un tallafocs perimetral (firewall) que filtra el trànsit, bloqueja països i serveis no desitjats i manté fora els atacs automàtics. A dins, segmentem la xarxa perquè un equip infectat no pugui contagiar la resta: separem servidors, ordinadors, càmeres i dispositius de convidats en zones aïllades.",
+        'La ciberseguridad de una empresa no es un único producto, sino varias capas que trabajan juntas. Empezamos por proteger la puerta de entrada con un cortafuegos perimetral (firewall) que filtra el tráfico, bloquea países y servicios no deseados y mantiene fuera los ataques automáticos. Dentro, segmentamos la red para que un equipo infectado no pueda contagiar al resto: separamos servidores, ordenadores, cámaras y dispositivos de invitados en zonas aisladas.',
+        "A company's cybersecurity is not a single product, but several layers working together. We start by protecting the front door with a perimeter firewall that filters traffic, blocks unwanted countries and services and keeps automated attacks out. Inside, we segment the network so an infected device can't spread to the rest: we separate servers, computers, cameras and guest devices into isolated zones."),
+      two(
+        "Per al teletreball i les delegacions, muntem connexions VPN xifrades: els teus empleats accedeixen als recursos de l'empresa des de casa o de fora amb la mateixa seguretat que si fossin a l'oficina, sense obrir el servidor a Internet. Tot el trànsit viatja xifrat i, si vols, hi afegim doble factor d'autenticació (2FA) perquè una contrasenya robada no sigui suficient per entrar.",
+        'Para el teletrabajo y las delegaciones, montamos conexiones VPN cifradas: tus empleados acceden a los recursos de la empresa desde casa o desde fuera con la misma seguridad que si estuvieran en la oficina, sin abrir el servidor a Internet. Todo el tráfico viaja cifrado y, si quieres, añadimos doble factor de autenticación (2FA) para que una contraseña robada no baste para entrar.',
+        'For remote work and branch offices, we set up encrypted VPN connections: your employees access company resources from home or on the road with the same security as if they were in the office, without exposing the server to the Internet. All traffic is encrypted and, if you want, we add two-factor authentication (2FA) so a stolen password is not enough to get in.'),
+      two(
+        "La major amenaça avui és el ransomware, que xifra tots els teus fitxers i demana un rescat. Per això combinem protecció activa (antivirus gestionat, filtratge de correu i navegació) amb la regla d'or de les còpies de seguretat: diverses còpies, una fora de l'empresa i una desconnectada. Fem una auditoria inicial, corregim els forats més evidents i et deixem un pla de bones pràctiques i formació per a l'equip, perquè la majoria d'incidents entren per un clic equivocat.",
+        'La mayor amenaza hoy es el ransomware, que cifra todos tus archivos y pide un rescate. Por eso combinamos protección activa (antivirus gestionado, filtrado de correo y navegación) con la regla de oro de las copias de seguridad: varias copias, una fuera de la empresa y una desconectada. Hacemos una auditoría inicial, corregimos los agujeros más evidentes y te dejamos un plan de buenas prácticas y formación para el equipo, porque la mayoría de incidentes entran por un clic equivocado.',
+        'The biggest threat today is ransomware, which encrypts all your files and demands a ransom. That\'s why we combine active protection (managed antivirus, email and browsing filtering) with the golden backup rule: several copies, one off-site and one offline. We run an initial audit, fix the most obvious holes and leave you a best-practices plan and team training, because most incidents come in through a wrong click.'),
     ],
   },
   {
@@ -371,6 +400,20 @@ export const items: Item[] = [
       two('Còpies de seguretat i pla de recuperació', 'Copias de seguridad y plan de recuperación', 'Backups and disaster-recovery plan'),
       two('Monitoratge i manteniment 24/7', 'Monitorización y mantenimiento 24/7', '24/7 monitoring and maintenance'),
       two('Migració sense pèrdua de dades', 'Migración sin pérdida de datos', 'Data-loss-free migration'),
+    ],
+    body: [
+      two(
+        "El servidor és el cor de la teva empresa: hi viuen el programa de gestió, els fitxers compartits, el correu i les còpies de seguretat. Per això no venem \"una caixa\" i marxem: primer analitzem com treballes, quants usuaris hi ha, quins programes fas servir i com creixeràs, i a partir d'aquí dimensionem la solució adequada. A vegades és un servidor físic a l'oficina, a vegades servidors virtualitzats i, cada cop més, una solució al núvol o híbrida.",
+        'El servidor es el corazón de tu empresa: en él viven el programa de gestión, los archivos compartidos, el correo y las copias de seguridad. Por eso no vendemos "una caja" y nos vamos: primero analizamos cómo trabajas, cuántos usuarios hay, qué programas usas y cómo vas a crecer, y a partir de ahí dimensionamos la solución adecuada. A veces es un servidor físico en la oficina, a veces servidores virtualizados y, cada vez más, una solución en la nube o híbrida.',
+        'The server is the heart of your company: it holds the management software, shared files, email and backups. That\'s why we don\'t just sell "a box" and leave: first we analyse how you work, how many users you have, which programs you use and how you\'ll grow, and from there we size the right solution. Sometimes it\'s a physical server in the office, sometimes virtualised servers and, increasingly, a cloud or hybrid solution.'),
+      two(
+        "Amb la virtualització (VMware, Hyper-V o Proxmox) traiem molt més partit del maquinari: diversos servidors \"lògics\" conviuen en una mateixa màquina, es fan còpies instantànies abans de qualsevol canvi i, si un equip falla, el servei es pot aixecar en un altre en minuts. Ho combinem amb alta disponibilitat i redundància (discos en RAID, alimentació i xarxa duplicades) perquè una avaria de maquinari no aturi el negoci.",
+        'Con la virtualización (VMware, Hyper-V o Proxmox) sacamos mucho más partido del hardware: varios servidores "lógicos" conviven en una misma máquina, se hacen copias instantáneas antes de cualquier cambio y, si un equipo falla, el servicio se puede levantar en otro en minutos. Lo combinamos con alta disponibilidad y redundancia (discos en RAID, alimentación y red duplicadas) para que una avería de hardware no pare el negocio.',
+        'With virtualisation (VMware, Hyper-V or Proxmox) we get far more out of the hardware: several "logical" servers coexist on one machine, snapshots are taken before any change and, if one machine fails, the service can be brought up on another in minutes. We combine this with high availability and redundancy (RAID disks, dual power and network) so a hardware failure doesn\'t stop the business.'),
+      two(
+        "Un servidor sense còpies de seguretat és una bomba de rellotgeria. Configurem còpies automàtiques i xifrades, amb una còpia fora de l'empresa, i verifiquem periòdicament que es poden restaurar de veritat, no només que \"es fan\". A més, ho monitorem 24/7: espai de disc, temperatura, estat dels discos i serveis crítics, de manera que sovint detectem i resolem el problema abans que tu te n'adonis. I quan cal migrar d'un servidor antic a un de nou, ho fem sense pèrdua de dades i, sempre que és possible, fora d'horari per no aturar la teva feina.",
+        'Un servidor sin copias de seguridad es una bomba de relojería. Configuramos copias automáticas y cifradas, con una copia fuera de la empresa, y verificamos periódicamente que se pueden restaurar de verdad, no solo que "se hacen". Además, lo monitorizamos 24/7: espacio de disco, temperatura, estado de los discos y servicios críticos, de modo que a menudo detectamos y resolvemos el problema antes de que tú te des cuenta. Y cuando hay que migrar de un servidor antiguo a uno nuevo, lo hacemos sin pérdida de datos y, siempre que es posible, fuera de horario para no parar tu trabajo.',
+        'A server without backups is a ticking time bomb. We set up automatic, encrypted backups, with one copy off-site, and periodically verify they can actually be restored, not just that they "run". We also monitor it 24/7: disk space, temperature, disk health and critical services, so we often detect and fix the problem before you even notice. And when it\'s time to migrate from an old server to a new one, we do it with no data loss and, whenever possible, outside working hours so we don\'t stop your work.'),
     ],
   },
   {

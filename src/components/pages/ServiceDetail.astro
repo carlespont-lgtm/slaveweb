@@ -67,6 +67,14 @@ const overviewPath = localizedPath(cat.segment, locale);
         ))
       }
     </div>
+
+    {item.body && item.body.length > 0 && (
+      <div class="reveal mt-14 border-t border-slate-100 pt-12">
+        <div class="space-y-5 text-base leading-relaxed text-slate-600">
+          {item.body.map((par) => <p>{t3(par, locale)}</p>)}
+        </div>
+      </div>
+    )}
   </div>
 </section>
 
