@@ -1,10 +1,10 @@
 ---
 import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
 import Icon from '../Icon.astro';
-import CardMockup from '../CardMockup.astro';
+import Illustration from '../Illustration.astro';
 import BrandFamily from '../BrandFamily.astro';
 import Partners from '../Partners.astro';
-import { itemsByCat, accentOf, t3 } from '../../data/services';
+import { itemsByCat, accentOf, svcIllo, t3 } from '../../data/services';
 
 interface Props {
   locale: Locale;
@@ -48,10 +48,16 @@ const maintenance = [
   <div class="relative mx-auto max-w-6xl px-4 py-20 sm:py-24">
     <div class="grid items-center gap-12 lg:grid-cols-2">
       <div class="max-w-2xl">
-        <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white backdrop-blur">
-          <Icon name="sparkles" class="h-4 w-4 text-brand-300" />
+        <a
+          href="https://siamcloud.es"
+          target="_blank"
+          rel="noopener"
+          class="group inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white backdrop-blur transition hover:border-brand-300/60 hover:bg-white/15"
+        >
+          <img src="/brand/siamcloud-mark.svg" alt="" width="16" height="16" class="h-4 w-4" />
           {t('hero.badge')}
-        </span>
+          <Icon name="arrow" class="h-3.5 w-3.5 text-brand-300 transition group-hover:translate-x-0.5" />
+        </a>
 
         <h1 class="mt-6 text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl">
           {t('hero.title1')}<br class="hidden sm:block" /> {t('hero.title2')}
@@ -123,7 +129,9 @@ const maintenance = [
             href={svcPath(item.slug)}
             class="reveal group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:shadow-md"
           >
-            <CardMockup icon={item.icon} accent={accentOf(item.slug)} class="h-36" />
+            <span class="block overflow-hidden border-b border-slate-100">
+              <Illustration name={svcIllo(item.slug)} class="transition duration-500 group-hover:scale-105" />
+            </span>
             <div class="flex flex-1 flex-col p-7 pt-6">
               <h3 class="text-lg font-bold text-ink-900">{t3(item.title, locale)}</h3>
               <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{t3(item.tagline, locale)}</p>

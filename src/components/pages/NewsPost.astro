@@ -1,7 +1,8 @@
 ---
 import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
 import Icon from '../Icon.astro';
-import { type Post, t3n } from '../../data/news';
+import Illustration from '../Illustration.astro';
+import { type Post, t3n, illoOf } from '../../data/news';
 
 interface Props {
   locale: Locale;
@@ -27,6 +28,9 @@ const linkHref = post.link ? post.link.href : '#';
     </div>
     <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">{t3n(post.title, locale)}</h1>
     <p class="mt-4 text-lg leading-relaxed text-slate-600">{t3n(post.excerpt, locale)}</p>
+    <div class="mt-8 overflow-hidden rounded-2xl border border-slate-100 shadow-sm">
+      <Illustration name={illoOf(post.slug)} />
+    </div>
     <div class="mt-8 space-y-5 text-slate-700">
       {post.body.map((par) => <p class="leading-relaxed">{t3n(par, locale)}</p>)}
     </div>

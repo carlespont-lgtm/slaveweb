@@ -33,11 +33,29 @@ const mock = (base: string) => `/mockups/${base}${locale === 'ca' ? '-ca' : loca
     </span>
     <h1 class="mt-6 max-w-3xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl">{t('product.title')}</h1>
     <p class="mt-5 max-w-2xl text-lg text-brand-50/85">{t('product.desc')}</p>
-    <div class="mt-8">
+    <div class="mt-8 flex flex-wrap items-center gap-3">
       <a href="https://fitoware.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg bg-brand-500 px-7 py-3.5 text-base font-semibold text-white shadow-lg transition hover:bg-brand-400">
         {t('product.cta')} <Icon name="external" class="h-5 w-5" />
       </a>
+      <a href="https://gestioerp.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-6 py-3.5 text-base font-semibold text-white backdrop-blur transition hover:bg-white/15">
+        <img src="/brand/gestioerp-mark.svg" alt="" width="20" height="20" class="h-5 w-5" />
+        {locale === 'es' ? 'Versión GestioERP' : locale === 'en' ? 'GestioERP edition' : 'Versió GestioERP'}
+      </a>
     </div>
+    <a
+      href="https://siamcloud.es"
+      target="_blank"
+      rel="noopener"
+      class="group mt-6 inline-flex items-center gap-2.5 text-sm font-medium text-brand-50/85 transition hover:text-white"
+    >
+      <img src="/brand/siamcloud-mark.svg" alt="SIAM Cloud" width="22" height="22" class="h-5 w-5" />
+      {locale === 'es'
+        ? 'Producto comercializado por SIAM Cloud'
+        : locale === 'en'
+          ? 'A product marketed by SIAM Cloud'
+          : 'Producte comercialitzat per SIAM Cloud'}
+      <Icon name="arrow" class="h-4 w-4 text-brand-300 transition group-hover:translate-x-0.5" />
+    </a>
   </div>
 </section>
 

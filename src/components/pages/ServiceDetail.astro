@@ -2,8 +2,7 @@
 import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
 import Icon from '../Icon.astro';
 import Illustration from '../Illustration.astro';
-import CardMockup from '../CardMockup.astro';
-import { categories, itemsByCat, accentOf, t3, type Item } from '../../data/services';
+import { categories, itemsByCat, accentOf, svcIllo, t3, type Item } from '../../data/services';
 
 interface Props {
   locale: Locale;
@@ -17,14 +16,6 @@ const related = itemsByCat(item.cat).filter((i) => i.slug !== item.slug).slice(0
 const detailPath = (slug: string) =>
   slug === 'fitoware-vivers' ? localizedPath('product', locale) : `${localizedPath('service', locale)}/${slug}`;
 
-// Icona Lucide del servei → il·lustració de colors (mockup relevant per pàgina)
-const illoMap: Record<string, string> = {
-  cloud: 'cloud', sparkles: 'rocket', leaf: 'box', layers: 'dashboard', external: 'window',
-  shield: 'security', 'file-text': 'files', clock: 'clock', wrench: 'support', printer: 'printer',
-  server: 'server', wifi: 'wifi', lock: 'security', 'shopping-cart': 'pos', folder: 'files',
-  mail: 'mail', phone: 'phone',
-};
-const illoFor = (name: string): string => illoMap[name] ?? 'dashboard';
 const overviewPath = localizedPath(cat.segment, locale);
 ---
 <!-- HERO -->
@@ -54,7 +45,7 @@ const overviewPath = localizedPath(cat.segment, locale);
         </div>
       </div>
       <div class="reveal is-visible">
-        <Illustration name={illoFor(item.icon)} class="mx-auto max-w-md overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10 lg:max-w-none" />
+        <Illustration name={svcIllo(item.slug)} class="mx-auto max-w-md overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10 lg:max-w-none" />
       </div>
     </div>
   </div>
@@ -93,7 +84,9 @@ const overviewPath = localizedPath(cat.segment, locale);
         <div class="mt-8 grid gap-5 sm:grid-cols-3">
           {related.map((r) => (
             <a href={detailPath(r.slug)} class="group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-brand-300 hover:shadow-md">
-              <CardMockup icon={r.icon} accent={accentOf(r.slug)} class="h-28" />
+              <span class="block overflow-hidden border-b border-slate-100">
+                <Illustration name={svcIllo(r.slug)} class="transition duration-500 group-hover:scale-105" />
+              </span>
               <div class="flex flex-1 flex-col p-6 pt-5">
                 <h3 class="text-base font-bold text-ink-900">{t3(r.title, locale)}</h3>
                 <p class="mt-1.5 flex-1 text-sm leading-relaxed text-slate-600">{t3(r.tagline, locale)}</p>

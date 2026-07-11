@@ -12,10 +12,46 @@ const blocks = [
   { h: 'legal.h3', p: 'legal.p3' },
   { h: 'legal.h4', p: 'legal.p4' },
 ];
+
+// Dades identificatives del titular
+const labels = {
+  ca: { title: 'Dades identificatives', company: 'Raó social', cif: 'CIF', address: 'Domicili', email: 'Correu electrònic', phone: 'Telèfon' },
+  es: { title: 'Datos identificativos', company: 'Razón social', cif: 'CIF', address: 'Domicilio', email: 'Correo electrónico', phone: 'Teléfono' },
+  en: { title: 'Company details', company: 'Legal name', cif: 'Tax ID (CIF)', address: 'Registered address', email: 'Email', phone: 'Phone' },
+}[locale];
+const legalData = {
+  company: 'Slave Computers, S.L.',
+  cif: 'B-00000000',
+  address: 'Botarell (43772), Tarragona',
+  email: 'info@slave.net',
+  phone: '+34 722 175 283',
+};
+const rows: { label: string; value: string; href?: string }[] = [
+  { label: labels.company, value: legalData.company },
+  { label: labels.cif, value: legalData.cif },
+  { label: labels.address, value: legalData.address },
+  { label: labels.email, value: legalData.email, href: `mailto:${legalData.email}` },
+  { label: labels.phone, value: legalData.phone, href: `tel:${legalData.phone.replace(/\s/g, '')}` },
+];
 ---
 <section class="bg-white py-16 sm:py-20">
   <div class="mx-auto max-w-3xl px-4">
     <h1 class="text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">{t('legal.title')}</h1>
+
+    <div class="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50/60">
+      <p class="border-b border-slate-200 bg-white px-5 py-3 text-sm font-bold uppercase tracking-wide text-brand-700">{labels.title}</p>
+      <dl class="divide-y divide-slate-200">
+        {rows.map((r) => (
+          <div class="flex flex-col gap-0.5 px-5 py-3 sm:flex-row sm:gap-4">
+            <dt class="w-40 shrink-0 text-sm font-semibold text-slate-500">{r.label}</dt>
+            <dd class="text-sm font-medium text-ink-900">
+              {r.href ? <a href={r.href} class="text-brand-700 underline-offset-2 hover:underline">{r.value}</a> : r.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+
     <div class="mt-10 space-y-10">
       {
         blocks.map((b) => (

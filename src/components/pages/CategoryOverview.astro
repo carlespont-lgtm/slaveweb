@@ -2,8 +2,8 @@
 import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
 import Icon from '../Icon.astro';
 import ServiceMockup from '../ServiceMockup.astro';
-import CardMockup from '../CardMockup.astro';
-import { categories, itemsByCat, accentColors, accentOf, t3, type CatKey } from '../../data/services';
+import Illustration from '../Illustration.astro';
+import { categories, itemsByCat, accentColors, accentOf, svcIllo, t3, type CatKey } from '../../data/services';
 
 interface Props {
   locale: Locale;
@@ -55,7 +55,9 @@ const catA = accentColors[catAccentKey[catKey]];
             href={detailPath(item.slug)}
             class="reveal group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-slate-50/60 transition duration-300 hover:-translate-y-1.5 hover:border-brand-300 hover:bg-white hover:shadow-md"
           >
-            <CardMockup icon={item.icon} accent={accentOf(item.slug)} class="h-36" />
+            <span class="block overflow-hidden border-b border-slate-100">
+              <Illustration name={svcIllo(item.slug)} class="transition duration-500 group-hover:scale-105" />
+            </span>
             <div class="flex flex-1 flex-col p-7 pt-6">
               <h3 class="text-lg font-bold text-ink-900">{t3(item.title, locale)}</h3>
               <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{t3(item.tagline, locale)}</p>

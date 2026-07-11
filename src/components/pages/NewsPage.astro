@@ -9,7 +9,8 @@ interface Props {
 }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
-const newsPath = (slug: string) => `${localizedPath('news', locale)}/${slug}`;
+const newsPath = (slug: string) =>
+  slug === 'fitoware-passaport' ? localizedPath('product', locale) : `${localizedPath('news', locale)}/${slug}`;
 const fmtDate = (iso: string) => {
   const [y, m, d] = iso.split('-');
   return `${d}/${m}/${y}`;

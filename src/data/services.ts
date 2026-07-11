@@ -36,6 +36,24 @@ const slugAccent: Record<string, string> = {
 };
 export const accentOf = (slug: string): Accent => accentColors[slugAccent[slug]] ?? accentColors.emerald;
 
+// Il·lustració de colors (component Illustration) per a cada servei —
+// escollides perquè dins d'una mateixa categoria totes siguin diferents.
+const serviceIllo: Record<string, string> = {
+  // serveis
+  'gestio-erp': 'dashboard', 'desenvolupament-mida': 'rocket', 'fitoware-vivers': 'box',
+  'migracio-nuvol': 'cloud', integracions: 'window', 'suport-manteniment': 'support',
+  // manteniment
+  'contracte-manteniment': 'files', 'banc-hores': 'clock', 'servei-tecnic': 'support',
+  'cost-copia': 'printer', garanties: 'security', 'recuperacio-dades': 'server',
+  // solucions
+  'programari-gestio': 'dashboard', 'wifi-professional': 'wifi', 'vpn-ciberseguretat': 'security',
+  servidors: 'server', 'impressores-3d': 'printer', 'productes-equips': 'box',
+  // núvol
+  'telefonia-voip': 'phone', 'backup-online': 'cloud', 'office-365': 'mail',
+  'dropbox-business': 'files', antivirus: 'security',
+};
+export const svcIllo = (slug: string): string => serviceIllo[slug] ?? 'dashboard';
+
 export interface Item {
   slug: string;
   cat: CatKey;
