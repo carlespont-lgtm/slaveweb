@@ -66,6 +66,30 @@ body {
   background-size: 22px 22px;
 }
 
+/* ---------- Transicions de pàgina (View Transitions API · Astro ClientRouter) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: slv-page-out 0.26s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+  ::view-transition-new(root) {
+    animation: slv-page-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes slv-page-out {
+    to { opacity: 0; transform: translateY(-10px) scale(0.992); }
+  }
+  @keyframes slv-page-in {
+    from { opacity: 0; transform: translateY(14px) scale(0.992); }
+  }
+}
+
+/* Elevació premium en passar el ratolí (targetes, botons…) */
+.lift {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+.lift:hover {
+  transform: translateY(-4px);
+}
+
 .prose img {
   height: auto;
 }
