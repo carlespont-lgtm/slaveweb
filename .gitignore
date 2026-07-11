@@ -11,3 +11,11 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
+
+# Fitxers font pesats (vídeos/imatges originals; el vídeo de fons ja és a public/video/)
+*.mov
+*.mp4
+!public/video/*.mp4
+Logo slave.jpg
+fitoware logo.jpg
+ionavis logo.jpg

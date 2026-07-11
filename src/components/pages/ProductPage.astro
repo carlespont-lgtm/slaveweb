@@ -10,9 +10,24 @@ const t = useTranslations(locale);
 const mock = (base: string) => `/mockups/${base}${locale === 'ca' ? '-ca' : locale === 'en' ? '-en' : ''}.svg`;
 ---
 <!-- HEADER -->
-<section class="relative overflow-hidden bg-gradient-to-br from-ink-950 via-ink-900 to-brand-800">
-  <div class="slv-dots absolute inset-0 opacity-60"></div>
-  <div class="relative mx-auto max-w-6xl px-4 py-20">
+<section class="relative overflow-hidden bg-ink-950">
+  <!-- Vídeo de fons -->
+  <video
+    class="absolute inset-0 h-full w-full object-cover"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    aria-hidden="true"
+    tabindex="-1"
+  >
+    <source src="/video/fitoware-hero.mp4" type="video/mp4" />
+  </video>
+  <!-- Capa fosca per llegibilitat del text -->
+  <div class="absolute inset-0 bg-gradient-to-br from-ink-950/92 via-ink-900/85 to-brand-800/75"></div>
+  <div class="slv-dots absolute inset-0 opacity-40"></div>
+  <div class="relative mx-auto max-w-6xl px-4 py-24 sm:py-32">
     <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white backdrop-blur">
       <Icon name="leaf" class="h-4 w-4 text-brand-300" /> {t('product.eyebrow')}
     </span>
