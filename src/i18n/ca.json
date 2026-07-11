@@ -3,6 +3,10 @@
   "site.tagline": "Programari de gestió i desenvolupament a mida",
   "site.desc": "Slave Computers, S.L. desenvolupa i implanta programari de gestió al núvol i desenvolupament a mida des de Botarell. Empresa del grup SIAM Cloud i creadora de Fitoware.",
   "site.keywords": "programari de gestió, ERP al núvol, desenvolupament a mida, Fitoware, SIAM Cloud, manteniment informàtic, telefonia VoIP, còpies de seguretat, Botarell, Tarragona",
+  "search.open": "Cercar",
+  "search.placeholder": "Cerca serveis, solucions, notícies…",
+  "search.hint": "Escriu per cercar a tota la web",
+  "search.empty": "Cap resultat per a",
 
   "nav.home": "Inici",
   "nav.services": "Serveis",

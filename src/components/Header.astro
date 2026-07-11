@@ -131,6 +131,14 @@ const viewAllCls = 'mt-1 flex items-center justify-between rounded-xl bg-slate-5
     </ul>
 
     <div class="flex items-center gap-2">
+      <button
+        type="button"
+        class="js-search-open grid h-10 w-10 place-items-center rounded-lg text-slate-600 transition hover:bg-slate-100 hover:text-brand-700"
+        aria-label={t('search.open')}
+        title={t('search.open')}
+      >
+        <Icon name="search" class="h-5 w-5" />
+      </button>
       <LangSwitcher locale={locale} />
       <a
         href={localizedPath('support', locale)}
@@ -241,6 +249,161 @@ const viewAllCls = 'mt-1 flex items-center justify-between rounded-xl bg-slate-5
     </ul>
   </div>
 </header>
+
+<!-- CERCADOR GLOBAL -->
+<div
+  id="site-search"
+  class="fixed inset-0 z-[60] hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label={t('search.open')}
+  data-endpoint={`/search-${locale}.json`}
+  data-empty={t('search.empty')}
+>
+  <div class="ss-backdrop absolute inset-0 bg-ink-950/50 backdrop-blur-sm"></div>
+  <div class="relative mx-auto mt-[10vh] w-[92%] max-w-xl">
+    <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
+      <div class="flex items-center gap-3 border-b border-slate-100 px-4">
+        <Icon name="search" class="h-5 w-5 shrink-0 text-slate-400" />
+        <input
+          id="ss-input"
+          type="search"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder={t('search.placeholder')}
+          aria-label={t('search.placeholder')}
+          class="w-full bg-transparent py-4 text-base text-ink-900 outline-none placeholder:text-slate-400"
+        />
+        <kbd class="hidden shrink-0 rounded border border-slate-200 bg-slate-50 px-1.5 py-0.5 text-xs text-slate-400 sm:block">Esc</kbd>
+      </div>
+      <div id="ss-results" class="max-h-[60vh] overflow-y-auto p-2"></div>
+      <div id="ss-empty" class="hidden px-4 py-10 text-center text-sm text-slate-500"></div>
+      <div id="ss-hint" class="flex items-center justify-center gap-2 px-4 py-10 text-center text-sm text-slate-400">
+        <Icon name="search" class="h-4 w-4" />
+        {t('search.hint')}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    if (window.__ssBound) return;
+    window.__ssBound = true;
+    var cache = {};
+    var items = [];
+    var sel = -1;
+
+    function q(id) { return document.getElementById(id); }
+    function modal() { return q('site-search'); }
+    function isOpen() { var m = modal(); return !!m && !m.classList.contains('hidden'); }
+    function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+    function esc(s) { return (s || '').replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+    function load(cb) {
+      var m = modal();
+      var url = m ? m.getAttribute('data-endpoint') : '/search-ca.json';
+      if (cache[url]) { cb(cache[url]); return; }
+      fetch(url).then(function (r) { return r.json(); }).then(function (d) { cache[url] = d; cb(d); }).catch(function () { cb([]); });
+    }
+
+    function open() {
+      var m = modal(); if (!m) return;
+      m.classList.remove('hidden');
+      document.documentElement.style.overflow = 'hidden';
+      load(function () {});
+      var input = q('ss-input');
+      setTimeout(function () { if (input) { input.focus(); input.select(); } }, 20);
+    }
+    function close() {
+      var m = modal(); if (!m) return;
+      m.classList.add('hidden');
+      document.documentElement.style.overflow = '';
+      var input = q('ss-input'); if (input) input.value = '';
+      render('');
+    }
+
+    function search(query, docs) {
+      var toks = norm(query).split(/\s+/).filter(Boolean);
+      if (!toks.length) return [];
+      var out = [];
+      for (var j = 0; j < docs.length; j++) {
+        var doc = docs[j];
+        var t = norm(doc.t), d = norm(doc.d), k = norm(doc.k), b = doc.b ? norm(doc.b) : '';
+        var hay = t + ' ' + d + ' ' + k + ' ' + b;
+        var ok = true, score = 0;
+        for (var i = 0; i < toks.length; i++) {
+          var tk = toks[i];
+          if (hay.indexOf(tk) === -1) { ok = false; break; }
+          if (t.indexOf(tk) === 0) score += 5;
+          else if (t.indexOf(tk) !== -1) score += 3;
+          else if (d.indexOf(tk) !== -1 || k.indexOf(tk) !== -1) score += 2;
+          else score += 1;
+        }
+        if (ok) out.push({ doc: doc, score: score });
+      }
+      out.sort(function (a, b) { return b.score - a.score; });
+      return out.slice(0, 8).map(function (x) { return x.doc; });
+    }
+
+    function highlight() {
+      var nodes = document.querySelectorAll('#ss-results .ss-item');
+      for (var i = 0; i < nodes.length; i++) nodes[i].classList.toggle('bg-brand-50', i === sel);
+      var cur = nodes[sel]; if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: 'nearest' });
+    }
+
+    function render(query) {
+      var results = q('ss-results'), empty = q('ss-empty'), hint = q('ss-hint');
+      if (!results) return;
+      if (!query) {
+        results.innerHTML = ''; items = []; sel = -1;
+        if (empty) empty.classList.add('hidden');
+        if (hint) hint.classList.remove('hidden');
+        return;
+      }
+      if (hint) hint.classList.add('hidden');
+      load(function (docs) {
+        var found = search(query, docs);
+        items = found; sel = found.length ? 0 : -1;
+        if (!found.length) {
+          results.innerHTML = '';
+          if (empty) { empty.classList.remove('hidden'); empty.textContent = (modal().getAttribute('data-empty') || '') + ' “' + query + '”'; }
+          return;
+        }
+        if (empty) empty.classList.add('hidden');
+        results.innerHTML = found.map(function (doc, i) {
+          return '<a href="' + esc(doc.u) + '" class="ss-item flex items-start gap-3 rounded-xl p-3 transition ' + (i === 0 ? 'bg-brand-50' : '') + '">'
+            + '<span class="mt-0.5 shrink-0 rounded-md bg-brand-100 px-2 py-0.5 text-[11px] font-semibold text-brand-700">' + esc(doc.k) + '</span>'
+            + '<span class="min-w-0"><span class="block text-sm font-semibold text-ink-900">' + esc(doc.t) + '</span>'
+            + '<span class="block truncate text-xs text-slate-500">' + esc(doc.d) + '</span></span></a>';
+        }).join('');
+      });
+    }
+
+    document.addEventListener('click', function (e) {
+      var opener = e.target.closest && e.target.closest('.js-search-open');
+      if (opener) { e.preventDefault(); open(); return; }
+      if (isOpen() && e.target.classList && e.target.classList.contains('ss-backdrop')) close();
+    });
+
+    document.addEventListener('input', function (e) {
+      if (e.target && e.target.id === 'ss-input') render(e.target.value.trim());
+    });
+
+    document.addEventListener('keydown', function (e) {
+      var k = e.key;
+      if ((e.metaKey || e.ctrlKey) && (k === 'k' || k === 'K')) { e.preventDefault(); if (isOpen()) close(); else open(); return; }
+      if (!isOpen()) return;
+      if (k === 'Escape') { e.preventDefault(); close(); }
+      else if (k === 'ArrowDown') { e.preventDefault(); if (items.length) { sel = (sel + 1) % items.length; highlight(); } }
+      else if (k === 'ArrowUp') { e.preventDefault(); if (items.length) { sel = (sel - 1 + items.length) % items.length; highlight(); } }
+      else if (k === 'Enter') { var nodes = document.querySelectorAll('#ss-results .ss-item'); var cur = nodes[sel]; if (cur) { e.preventDefault(); window.location.href = cur.getAttribute('href'); } }
+    });
+
+    // En navegar amb view transitions, netejar l'estat del cercador.
+    document.addEventListener('astro:after-swap', function () { document.documentElement.style.overflow = ''; });
+  })();
+</script>
 
 <script is:inline>
   (function () {

@@ -3,6 +3,10 @@
   "site.tagline": "Business software and custom development",
   "site.desc": "Slave Computers, S.L. builds and deploys cloud business software and custom development from Botarell. Part of the SIAM Cloud group and creator of Fitoware.",
   "site.keywords": "business software, cloud ERP, custom development, Fitoware, SIAM Cloud, IT maintenance, VoIP telephony, backups, Botarell, Tarragona",
+  "search.open": "Search",
+  "search.placeholder": "Search services, solutions, news…",
+  "search.hint": "Type to search the whole site",
+  "search.empty": "No results for",
 
   "nav.home": "Home",
   "nav.services": "Services",
