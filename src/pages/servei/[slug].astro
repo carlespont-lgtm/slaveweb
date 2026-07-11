@@ -9,6 +9,6 @@ export function getStaticPaths() {
 
 const { item } = Astro.props as { item: Item };
 ---
-<BaseLayout title={t3(item.title, 'ca')} description={t3(item.tagline, 'ca')}>
+<BaseLayout title={t3(item.title, 'ca')} description={t3(item.tagline, 'ca')} noindex={item.slug === 'fitoware-vivers'}>
   <ServiceDetail locale="ca" item={item} />
 </BaseLayout>

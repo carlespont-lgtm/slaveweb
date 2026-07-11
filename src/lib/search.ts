@@ -63,7 +63,7 @@ export function searchIndex(locale: Locale): SearchDoc[] {
     docs.push({
       t: t3(it.title, locale),
       d: t3(it.tagline, locale),
-      u: slash(`${localizedPath('service', locale)}/${it.slug}`),
+      u: slash(it.slug === 'fitoware-vivers' ? localizedPath('product', locale) : `${localizedPath('service', locale)}/${it.slug}`),
       k: t3(categories[it.cat].hero.eyebrow, locale),
       b: `${t3(it.intro, locale)} ${feats}`.toLowerCase(),
     });
@@ -74,7 +74,7 @@ export function searchIndex(locale: Locale): SearchDoc[] {
     docs.push({
       t: t3n(p.title, locale),
       d: t3n(p.excerpt, locale),
-      u: slash(`${localizedPath('news', locale)}/${p.slug}`),
+      u: slash(p.slug === 'fitoware-passaport' ? localizedPath('product', locale) : `${localizedPath('news', locale)}/${p.slug}`),
       k: t3n(p.tag, locale),
       b: p.body.map((x) => t3n(x, locale)).join(' ').toLowerCase(),
     });

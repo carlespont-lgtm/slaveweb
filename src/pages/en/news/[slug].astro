@@ -9,6 +9,6 @@ export function getStaticPaths() {
 
 const { post } = Astro.props as { post: Post };
 ---
-<BaseLayout title={t3n(post.title, 'en')} description={t3n(post.excerpt, 'en')}>
+<BaseLayout title={t3n(post.title, 'en')} description={t3n(post.excerpt, 'en')} noindex={post.slug === 'fitoware-passaport'}>
   <NewsPost locale="en" post={post} />
 </BaseLayout>
