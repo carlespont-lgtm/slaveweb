@@ -29,7 +29,7 @@ const slugAccent: Record<string, string> = {
   'cost-copia': 'teal', garanties: 'emerald', 'recuperacio-dades': 'red',
   // solucions
   'programari-gestio': 'emerald', 'wifi-professional': 'cyan', 'vpn-ciberseguretat': 'indigo',
-  servidors: 'blue', 'impressores-3d': 'orange', 'productes-botiga': 'pink',
+  servidors: 'blue', 'impressores-3d': 'orange', 'productes-equips': 'pink',
   // núvol
   'telefonia-voip': 'teal', 'backup-online': 'sky', 'office-365': 'red',
   'dropbox-business': 'blue', antivirus: 'violet',
@@ -176,9 +176,9 @@ export const items: Item[] = [
     title: two('Integracions', 'Integraciones', 'Integrations'),
     tagline: two('Connectem els teus sistemes: Dynamics 365, APIs i pagaments.', 'Conectamos tus sistemas: Dynamics 365, APIs y pagos.', 'We connect your systems: Dynamics 365, APIs and payments.'),
     intro: two(
-      'Connectem el teu programari de gestió amb la resta de sistemes: Microsoft Dynamics 365 Business Central, APIs de tercers, passarel·les de pagament, facturació electrònica i botigues online.',
-      'Conectamos tu software de gestión con el resto de sistemas: Microsoft Dynamics 365 Business Central, APIs de terceros, pasarelas de pago, facturación electrónica y tiendas online.',
-      'We connect your management software with the rest of your systems: Microsoft Dynamics 365 Business Central, third-party APIs, payment gateways, e-invoicing and online stores.'),
+      'Connectem el teu programari de gestió amb la resta de sistemes: Microsoft Dynamics 365 Business Central, APIs de tercers, passarel·les de pagament, facturació electrònica i comerç electrònic.',
+      'Conectamos tu software de gestión con el resto de sistemas: Microsoft Dynamics 365 Business Central, APIs de terceros, pasarelas de pago, facturación electrónica y comercio electrónico.',
+      'We connect your management software with the rest of your systems: Microsoft Dynamics 365 Business Central, third-party APIs, payment gateways, e-invoicing and e-commerce.'),
     features: [
       two('Microsoft Dynamics 365 Business Central', 'Microsoft Dynamics 365 Business Central', 'Microsoft Dynamics 365 Business Central'),
       two('APIs i serveis de tercers', 'APIs y servicios de terceros', 'Third-party APIs and services'),
@@ -343,14 +343,16 @@ export const items: Item[] = [
     title: two('Servidors', 'Servidores', 'Servers'),
     tagline: two('Físics, virtualitzats i cloud, amb migració garantida.', 'Físicos, virtualizados y cloud, con migración garantizada.', 'Physical, virtualised and cloud, with guaranteed migration.'),
     intro: two(
-      'Dissenyem, instal·lem i mantenim els teus servidors: físics, virtualitzats o al núvol, amb còpies de seguretat, alta disponibilitat i una migració sense pèrdua de dades.',
-      'Diseñamos, instalamos y mantenemos tus servidores: físicos, virtualizados o en la nube, con copias de seguridad, alta disponibilidad y una migración sin pérdida de datos.',
-      'We design, install and maintain your servers: physical, virtualised or in the cloud, with backups, high availability and a data-loss-free migration.'),
+      "Dissenyem, instal·lem i mantenim la infraestructura de servidors de la teva empresa, adaptada a la teva càrrega de treball real. Treballem amb servidors físics de marques líders, virtualització (VMware, Hyper-V i Proxmox) i servidors al núvol, sempre amb còpies de seguretat, monitoratge 24/7 i plans de recuperació davant desastres. Fem l'estudi previ, dimensionem l'equip, el configurem i te'l migrem sense pèrdua de dades ni aturades del negoci.",
+      'Diseñamos, instalamos y mantenemos la infraestructura de servidores de tu empresa, adaptada a tu carga de trabajo real. Trabajamos con servidores físicos de marcas líderes, virtualización (VMware, Hyper-V y Proxmox) y servidores en la nube, siempre con copias de seguridad, monitorización 24/7 y planes de recuperación ante desastres. Hacemos el estudio previo, dimensionamos el equipo, lo configuramos y te lo migramos sin pérdida de datos ni paradas del negocio.',
+      'We design, install and maintain your company’s server infrastructure, tailored to your real workload. We work with physical servers from leading brands, virtualisation (VMware, Hyper-V and Proxmox) and cloud servers, always with backups, 24/7 monitoring and disaster-recovery plans. We run the survey, size the hardware, configure it and migrate it with no data loss and no business downtime.'),
     features: [
-      two('Servidors físics i virtualització', 'Servidores físicos y virtualización', 'Physical servers and virtualisation'),
-      two('Alta disponibilitat', 'Alta disponibilidad', 'High availability'),
-      two('Còpies de seguretat automàtiques', 'Copias de seguridad automáticas', 'Automatic backups'),
-      two('Migració garantida', 'Migración garantizada', 'Guaranteed migration'),
+      two('Servidors físics de marques líders', 'Servidores físicos de marcas líderes', 'Physical servers from leading brands'),
+      two('Virtualització VMware, Hyper-V i Proxmox', 'Virtualización VMware, Hyper-V y Proxmox', 'Virtualisation: VMware, Hyper-V and Proxmox'),
+      two('Alta disponibilitat i redundància', 'Alta disponibilidad y redundancia', 'High availability and redundancy'),
+      two('Còpies de seguretat i pla de recuperació', 'Copias de seguridad y plan de recuperación', 'Backups and disaster-recovery plan'),
+      two('Monitoratge i manteniment 24/7', 'Monitorización y mantenimiento 24/7', '24/7 monitoring and maintenance'),
+      two('Migració sense pèrdua de dades', 'Migración sin pérdida de datos', 'Data-loss-free migration'),
     ],
   },
   {
@@ -369,9 +371,9 @@ export const items: Item[] = [
     ],
   },
   {
-    slug: 'productes-botiga', cat: 'sol', icon: 'shopping-cart',
-    title: two('Productes i botiga', 'Productos y tienda', 'Products & store'),
-    tagline: two('Els millors productes informàtics i la nostra botiga online.', 'Los mejores productos informáticos y nuestra tienda online.', 'The best IT products and our online store.'),
+    slug: 'productes-equips', cat: 'sol', icon: 'shopping-cart',
+    title: two('Productes i equips', 'Productos y equipos', 'Products & equipment'),
+    tagline: two('Els millors productes i equips informàtics per a empreses.', 'Los mejores productos y equipos informáticos para empresas.', 'The best IT products and equipment for companies.'),
     intro: two(
       'Seleccionem i venem els millors equips i productes informàtics per a empreses: ordinadors, portàtils, xarxa, emmagatzematge i perifèrics, amb assessorament i garantia.',
       'Seleccionamos y vendemos los mejores equipos y productos informáticos para empresas: ordenadores, portátiles, red, almacenamiento y periféricos, con asesoramiento y garantía.',
