@@ -96,3 +96,14 @@ export const posts: Post[] = [
 // Ordenats per data descendent (les 5 últimes per al menú)
 export const latest = [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
 export const findPost = (slug: string): Post | undefined => posts.find((p) => p.slug === slug);
+
+// Miniatura visual (icona + degradat) per a cada notícia al menú
+export const postVisual: Record<string, { icon: string; from: string; to: string }> = {
+  'slave-grup-siamcloud': { icon: 'sparkles', from: '#60a5fa', to: '#1d4ed8' },
+  'gestioerp-verifactu': { icon: 'layers', from: '#34d39e', to: '#0c7d68' },
+  'wifi-hotels-unifi': { icon: 'wifi', from: '#818cf8', to: '#4338ca' },
+  'telefonia-voip-estalvi': { icon: 'phone', from: '#2dd4bf', to: '#0f766e' },
+  'fitoware-passaport': { icon: 'leaf', from: '#a3e635', to: '#4d7c0f' },
+};
+export const visualOf = (slug: string): { icon: string; from: string; to: string } =>
+  postVisual[slug] ?? { icon: 'bell', from: '#34d39e', to: '#0c7d68' };

@@ -62,11 +62,15 @@ export function getAlternatePath(url: URL, target: Locale): string {
   let parts = url.pathname.split('/').filter(Boolean);
   if (parts[0] === 'es' || parts[0] === 'en') parts = parts.slice(1);
 
-  if (parts.length === 0) return localePrefix(target) || '/';
+  if (parts.length === 0) {
+    const p = localePrefix(target);
+    return p ? p + '/' : '/';
+  }
 
   const key = segmentToKey[parts[0]];
   if (key) parts[0] = routeSegments[key][target];
 
   const prefix = localePrefix(target);
-  return `${prefix}/${parts.join('/')}`;
+  // barra final: coincidir amb el canonical (Astro build "directory") i el sitemap
+  return `${prefix}/${parts.join('/')}/`;
 }

@@ -4,8 +4,8 @@ interface Props {
   class?: string;
 }
 const { size = 'md', class: className = '' } = Astro.props;
-const mark = size === 'lg' ? 'h-12 w-12' : 'h-10 w-10';
-const wm = size === 'lg' ? 'h-8 sm:h-9' : 'h-7';
+const mark = size === 'lg' ? 'h-14 w-14' : 'h-11 w-11';
+const wm = size === 'lg' ? 'h-9 sm:h-11' : 'h-8';
 const uid = `slv-${size}`;
 ---
 <span class={`flex items-center gap-2.5 ${className}`} aria-label="Slave Computer">
