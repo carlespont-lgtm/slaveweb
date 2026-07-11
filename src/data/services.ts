@@ -41,7 +41,7 @@ export const accentOf = (slug: string): Accent => accentColors[slugAccent[slug]]
 const serviceIllo: Record<string, string> = {
   // serveis
   'gestio-erp': 'dashboard', 'desenvolupament-mida': 'rocket', 'fitoware-vivers': 'box',
-  'migracio-nuvol': 'cloud', integracions: 'window', 'suport-manteniment': 'support',
+  'migracio-nuvol': 'cloud', integracions: 'connect', 'suport-manteniment': 'support',
   // manteniment
   'contracte-manteniment': 'files', 'banc-hores': 'clock', 'servei-tecnic': 'support',
   'cost-copia': 'printer', garanties: 'security', 'recuperacio-dades': 'server',
@@ -409,14 +409,16 @@ export const items: Item[] = [
     title: two('Telefonia VoIP', 'Telefonía VoIP', 'VoIP telephony'),
     tagline: two('Centraleta al núvol amb tarifes reduïdes i sense establiment.', 'Centralita en la nube con tarifas reducidas y sin establecimiento.', 'Cloud PBX with reduced rates and no call setup fee.'),
     intro: two(
-      "Integra una centraleta virtual al núvol amb tarifes reduïdes i sense establiment de trucada, extensions al mòbil per teletreballar i tot el control des del navegador. Mantens el teu número.",
-      'Integra una centralita virtual en la nube con tarifas reducidas y sin establecimiento de llamada, extensiones en el móvil para teletrabajar y todo el control desde el navegador. Mantienes tu número.',
-      'Integrate a virtual cloud PBX with reduced rates and no call-setup fee, mobile extensions for remote work and full control from the browser. Keep your number.'),
+      "Substituïm la teva centraleta física per una centraleta virtual al núvol, sense inversió inicial ni manteniment de maquinari. Tens tarifes reduïdes i sense establiment de trucada, línies i extensions il·limitades, i portes les extensions al mòbil o a l'ordinador per teletreballar des de qualsevol lloc. Ho gestiones tot des del navegador: desviaments, horaris, bústies de veu, cues d'espera, locucions de benvinguda (IVR), gravació de trucades i estadístiques. Conservem el teu número i, si vols, integrem la telefonia amb el teu CRM o GestioERP perquè la fitxa del client aparegui en despenjar.",
+      'Sustituimos tu centralita física por una centralita virtual en la nube, sin inversión inicial ni mantenimiento de hardware. Tienes tarifas reducidas y sin establecimiento de llamada, líneas y extensiones ilimitadas, y llevas las extensiones al móvil o al ordenador para teletrabajar desde cualquier lugar. Lo gestionas todo desde el navegador: desvíos, horarios, buzones de voz, colas de espera, locuciones de bienvenida (IVR), grabación de llamadas y estadísticas. Conservamos tu número y, si quieres, integramos la telefonía con tu CRM o GestioERP para que la ficha del cliente aparezca al descolgar.',
+      'We replace your physical PBX with a virtual cloud PBX, with no upfront investment or hardware maintenance. You get reduced rates with no call-setup fee, unlimited lines and extensions, and you take your extensions to your mobile or computer to work from anywhere. You manage everything from the browser: call forwarding, schedules, voicemail, waiting queues, welcome messages (IVR), call recording and stats. We keep your number and, if you want, we integrate telephony with your CRM or GestioERP so the customer record pops up when you answer.'),
     features: [
-      two('Centraleta virtual al núvol', 'Centralita virtual en la nube', 'Virtual cloud PBX'),
-      two('Tarifes reduïdes, sense establiment', 'Tarifas reducidas, sin establecimiento', 'Reduced rates, no setup fee'),
-      two('Extensions mòbils i teletreball', 'Extensiones móviles y teletrabajo', 'Mobile extensions and remote work'),
-      two('Mantén el teu número', 'Mantén tu número', 'Keep your number'),
+      two('Centraleta virtual al núvol, sense maquinari', 'Centralita virtual en la nube, sin hardware', 'Virtual cloud PBX, no hardware'),
+      two('Tarifes reduïdes i sense establiment', 'Tarifas reducidas y sin establecimiento', 'Reduced rates, no setup fee'),
+      two('Extensions al mòbil i a l\'ordinador (teletreball)', 'Extensiones en móvil y ordenador (teletrabajo)', 'Extensions on mobile and desktop (remote work)'),
+      two('IVR, cues, bústies de veu i horaris', 'IVR, colas, buzones de voz y horarios', 'IVR, queues, voicemail and schedules'),
+      two('Gravació de trucades i estadístiques', 'Grabación de llamadas y estadísticas', 'Call recording and statistics'),
+      two('Integració amb CRM / GestioERP i el teu número', 'Integración con CRM / GestioERP y tu número', 'CRM / GestioERP integration, keep your number'),
     ],
   },
   {

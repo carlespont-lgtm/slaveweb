@@ -6,8 +6,13 @@
 interface Props {
   name: string;
   class?: string;
+  /** Colors de marca per tintar el fons (opcional) — perquè cada targeta sigui diferent. */
+  accent?: { from: string; to: string; soft: string; text: string };
 }
-const { name, class: className = '' } = Astro.props;
+const { name, class: className = '', accent } = Astro.props;
+const bg = accent?.soft ?? '#ecfdf5';
+const blob1 = accent?.from ?? '#34d39e';
+const blob2 = accent?.to ?? '#3b82f6';
 
 const scenes: Record<string, string> = {
   dashboard: `
@@ -129,14 +134,27 @@ const scenes: Record<string, string> = {
     <circle cx="160" cy="140" r="26" fill="#3b82f6"/><path d="M124 208 a36 36 0 0 1 72 0 Z" fill="#3b82f6"/>
     <circle cx="260" cy="140" r="26" fill="#f59e0b"/><path d="M224 208 a36 36 0 0 1 72 0 Z" fill="#f59e0b"/>
     <circle cx="210" cy="122" r="30" fill="#0d9e80"/><path d="M168 200 a42 42 0 0 1 84 0 Z" fill="#0d9e80"/>`,
+  connect: `
+    <rect x="90" y="118" width="98" height="84" rx="12" fill="#ffffff" stroke="#e2e8f0"/>
+    <rect x="104" y="134" width="60" height="10" rx="5" fill="#16bd95"/>
+    <rect x="104" y="154" width="48" height="8" rx="4" fill="#e2e8f0"/>
+    <rect x="104" y="170" width="54" height="8" rx="4" fill="#e2e8f0"/>
+    <rect x="232" y="118" width="98" height="84" rx="12" fill="#ffffff" stroke="#e2e8f0"/>
+    <rect x="246" y="134" width="60" height="10" rx="5" fill="#3b82f6"/>
+    <rect x="246" y="154" width="48" height="8" rx="4" fill="#e2e8f0"/>
+    <rect x="246" y="170" width="54" height="8" rx="4" fill="#e2e8f0"/>
+    <path d="M188 160 h44" stroke="#0d9e80" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 11"/>
+    <circle cx="210" cy="160" r="20" fill="#0d9e80"/>
+    <path d="M202 160 h16 M210 152 v16" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="150" cy="98" r="6" fill="#f59e0b"/><circle cx="286" cy="222" r="6" fill="#fb7185"/><circle cx="326" cy="104" r="4" fill="#34d39e"/>`,
 };
 
 const inner = scenes[name] ?? scenes.dashboard;
 ---
 
 <svg viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" class={`h-auto w-full ${className}`}>
-  <rect x="0" y="0" width="420" height="320" rx="24" fill="#ecfdf5" />
-  <circle cx="64" cy="60" r="70" fill="#d0fbe7" />
-  <circle cx="372" cy="280" r="96" fill="#bfdbfe" opacity="0.45" />
+  <rect x="0" y="0" width="420" height="320" rx="24" fill={bg} />
+  <circle cx="64" cy="60" r="78" fill={blob1} opacity="0.28" />
+  <circle cx="372" cy="280" r="96" fill={blob2} opacity="0.3" />
   <g set:html={inner} />
 </svg>

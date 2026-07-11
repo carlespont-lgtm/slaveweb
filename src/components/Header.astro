@@ -4,7 +4,7 @@ import LangSwitcher from './LangSwitcher.astro';
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 import { itemsByCat, accentOf, svcIllo, t3, type CatKey } from '../data/services';
-import { latest, t3n, illoOf } from '../data/news';
+import { latest, t3n, illoOf, newsAccent } from '../data/news';
 import Illustration from './Illustration.astro';
 
 interface Props {
@@ -69,7 +69,7 @@ const viewAllCls = 'mt-1 flex items-center justify-between rounded-xl bg-slate-5
                   {itemsByCat(h.cat).map((item) => (
                     <a href={itemHref(item.slug)} class="group/i flex items-center gap-3 rounded-xl p-2.5 transition hover:bg-brand-50">
                       <span class="w-[4.75rem] shrink-0 overflow-hidden rounded-lg border border-slate-100 shadow-sm transition group-hover/i:border-brand-200 group-hover/i:shadow">
-                        <Illustration name={svcIllo(item.slug)} />
+                        <Illustration name={svcIllo(item.slug)} accent={accentOf(item.slug)} />
                       </span>
                       <span class="min-w-0">
                         <span class="block text-sm font-semibold leading-tight text-ink-900 line-clamp-2 group-hover/i:text-brand-700">{t3(item.title, locale)}</span>
@@ -99,7 +99,7 @@ const viewAllCls = 'mt-1 flex items-center justify-between rounded-xl bg-slate-5
               {latest.slice(0, 5).map((p) => (
                 <a href={newsHref(p.slug)} class="group/i flex items-start gap-3 rounded-xl p-2.5 transition hover:bg-brand-50">
                   <span class="w-[4.75rem] shrink-0 overflow-hidden rounded-lg border border-slate-100 shadow-sm transition group-hover/i:border-brand-200 group-hover/i:shadow">
-                    <Illustration name={illoOf(p.slug)} />
+                    <Illustration name={illoOf(p.slug)} accent={newsAccent(p.slug)} />
                   </span>
                   <span class="min-w-0">
                     <span class="flex items-center gap-2 text-xs font-semibold">
@@ -201,7 +201,7 @@ const viewAllCls = 'mt-1 flex items-center justify-between rounded-xl bg-slate-5
             {latest.slice(0, 5).map((p) => (
               <a href={newsHref(p.slug)} class="flex items-center gap-3 rounded-lg px-3 py-2 transition hover:bg-slate-50">
                 <span class="w-12 shrink-0 overflow-hidden rounded-md border border-slate-100 shadow-sm">
-                  <Illustration name={illoOf(p.slug)} />
+                  <Illustration name={illoOf(p.slug)} accent={newsAccent(p.slug)} />
                 </span>
                 <span class="min-w-0">
                   <span class="block truncate text-sm font-medium text-slate-700">{t3n(p.title, locale)}</span>

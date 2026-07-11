@@ -10,7 +10,7 @@ export interface Post {
   title: L;
   excerpt: L;
   body: L[];
-  link?: { label: L; href: string };
+  link?: { label: L; href: string; logo?: string };
 }
 
 const two = (ca: string, es: string, en: string): L => ({ ca, es, en });
@@ -29,7 +29,7 @@ export const posts: Post[] = [
       two('Slave Computers, S.L. forma part del grup SIAM Cloud, la plataforma tecnològica que desenvolupa i comercialitza GestioERP, Fitoware i altres solucions de gestió al núvol des de Botarell.', 'Slave Computers, S.L. forma parte del grupo SIAM Cloud, la plataforma tecnológica que desarrolla y comercializa GestioERP, Fitoware y otras soluciones de gestión en la nube desde Botarell.', 'Slave Computers, S.L. is part of the SIAM Cloud group, the technology platform that develops and markets GestioERP, Fitoware and other cloud management solutions from Botarell.'),
       two('Seguim sent el mateix equip de proximitat de sempre, ara amb la força d\'un ecosistema cloud complet al teu costat.', 'Seguimos siendo el mismo equipo de proximidad de siempre, ahora con la fuerza de un ecosistema cloud completo a tu lado.', 'We remain the same close-knit team as always, now with the strength of a complete cloud ecosystem at your side.'),
     ],
-    link: { label: two('Descobreix SIAM Cloud', 'Descubre SIAM Cloud', 'Discover SIAM Cloud'), href: 'https://siamcloud.es' },
+    link: { label: two('Descobreix SIAM Cloud', 'Descubre SIAM Cloud', 'Discover SIAM Cloud'), href: 'https://siamcloud.es', logo: '/brand/siamcloud-mark.svg' },
   },
   {
     slug: 'gestioerp-verifactu',
@@ -97,16 +97,22 @@ export const posts: Post[] = [
 export const latest = [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
 export const findPost = (slug: string): Post | undefined => posts.find((p) => p.slug === slug);
 
-// Miniatura visual (icona + degradat) per a cada notícia al menú
-export const postVisual: Record<string, { icon: string; from: string; to: string }> = {
-  'slave-grup-siamcloud': { icon: 'sparkles', from: '#60a5fa', to: '#1d4ed8' },
-  'gestioerp-verifactu': { icon: 'layers', from: '#34d39e', to: '#0c7d68' },
-  'wifi-hotels-unifi': { icon: 'wifi', from: '#818cf8', to: '#4338ca' },
-  'telefonia-voip-estalvi': { icon: 'phone', from: '#2dd4bf', to: '#0f766e' },
-  'fitoware-passaport': { icon: 'leaf', from: '#a3e635', to: '#4d7c0f' },
+// Miniatura visual (icona + degradat + fons) per a cada notícia
+export const postVisual: Record<string, { icon: string; from: string; to: string; soft: string }> = {
+  'slave-grup-siamcloud': { icon: 'sparkles', from: '#60a5fa', to: '#1d4ed8', soft: '#dbeafe' },
+  'gestioerp-verifactu': { icon: 'layers', from: '#34d39e', to: '#0c7d68', soft: '#d0fbe7' },
+  'wifi-hotels-unifi': { icon: 'wifi', from: '#818cf8', to: '#4338ca', soft: '#e0e7ff' },
+  'telefonia-voip-estalvi': { icon: 'phone', from: '#2dd4bf', to: '#0f766e', soft: '#ccfbf1' },
+  'fitoware-passaport': { icon: 'leaf', from: '#a3e635', to: '#4d7c0f', soft: '#ecfccb' },
 };
-export const visualOf = (slug: string): { icon: string; from: string; to: string } =>
-  postVisual[slug] ?? { icon: 'bell', from: '#34d39e', to: '#0c7d68' };
+export const visualOf = (slug: string): { icon: string; from: string; to: string; soft: string } =>
+  postVisual[slug] ?? { icon: 'bell', from: '#34d39e', to: '#0c7d68', soft: '#d0fbe7' };
+
+// Accent per tintar la il·lustració de cada notícia (cada una diferent)
+export const newsAccent = (slug: string): { from: string; to: string; soft: string; text: string } => {
+  const v = visualOf(slug);
+  return { from: v.from, to: v.to, soft: v.soft, text: v.to };
+};
 
 // Il·lustració de colors (component Illustration) per a cada notícia
 const postIllo: Record<string, string> = {

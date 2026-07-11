@@ -2,7 +2,7 @@
 import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
 import Icon from '../Icon.astro';
 import Illustration from '../Illustration.astro';
-import { type Post, t3n, illoOf } from '../../data/news';
+import { type Post, t3n, illoOf, newsAccent } from '../../data/news';
 
 interface Props {
   locale: Locale;
@@ -29,7 +29,7 @@ const linkHref = post.link ? post.link.href : '#';
     <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">{t3n(post.title, locale)}</h1>
     <p class="mt-4 text-lg leading-relaxed text-slate-600">{t3n(post.excerpt, locale)}</p>
     <div class="mt-8 overflow-hidden rounded-2xl border border-slate-100 shadow-sm">
-      <Illustration name={illoOf(post.slug)} />
+      <Illustration name={illoOf(post.slug)} accent={newsAccent(post.slug)} />
     </div>
     <div class="mt-8 space-y-5 text-slate-700">
       {post.body.map((par) => <p class="leading-relaxed">{t3n(par, locale)}</p>)}
@@ -40,8 +40,9 @@ const linkHref = post.link ? post.link.href : '#';
           href={linkHref}
           target={isExternal ? '_blank' : undefined}
           rel={isExternal ? 'noopener' : undefined}
-          class="mt-8 inline-flex items-center gap-2 rounded-lg bg-brand-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-600"
+          class="mt-8 inline-flex items-center gap-2.5 rounded-lg bg-brand-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-600"
         >
+          {post.link.logo && <img src={post.link.logo} alt="" width="20" height="20" class="h-5 w-5 rounded" />}
           {t3n(post.link.label, locale)} <Icon name="arrow" class="h-4 w-4" />
         </a>
       )

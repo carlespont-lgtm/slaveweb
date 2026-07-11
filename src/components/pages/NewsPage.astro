@@ -2,7 +2,7 @@
 import { useTranslations, localizedPath, type Locale } from '../../i18n/utils';
 import Icon from '../Icon.astro';
 import Illustration from '../Illustration.astro';
-import { latest, t3n, illoOf } from '../../data/news';
+import { latest, t3n, illoOf, newsAccent } from '../../data/news';
 
 interface Props {
   locale: Locale;
@@ -31,7 +31,7 @@ const fmtDate = (iso: string) => {
         latest.map((p) => (
           <a href={newsPath(p.slug)} class="reveal group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-slate-50/60 transition duration-300 hover:-translate-y-1.5 hover:border-brand-300 hover:bg-white hover:shadow-md">
             <span class="block overflow-hidden border-b border-slate-100">
-              <Illustration name={illoOf(p.slug)} class="transition duration-500 group-hover:scale-105" />
+              <Illustration name={illoOf(p.slug)} accent={newsAccent(p.slug)} class="transition duration-500 group-hover:scale-105" />
             </span>
             <div class="flex flex-1 flex-col p-7 pt-6">
               <div class="flex items-center gap-2 text-xs font-semibold">

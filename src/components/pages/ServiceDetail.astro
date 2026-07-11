@@ -45,7 +45,7 @@ const overviewPath = localizedPath(cat.segment, locale);
         </div>
       </div>
       <div class="reveal is-visible">
-        <Illustration name={svcIllo(item.slug)} class="mx-auto max-w-md overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10 lg:max-w-none" />
+        <Illustration name={svcIllo(item.slug)} accent={a} class="mx-auto max-w-md overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10 lg:max-w-none" />
       </div>
     </div>
   </div>
@@ -85,7 +85,7 @@ const overviewPath = localizedPath(cat.segment, locale);
           {related.map((r) => (
             <a href={detailPath(r.slug)} class="group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1.5 hover:border-brand-300 hover:shadow-md">
               <span class="block overflow-hidden border-b border-slate-100">
-                <Illustration name={svcIllo(r.slug)} class="transition duration-500 group-hover:scale-105" />
+                <Illustration name={svcIllo(r.slug)} accent={accentOf(r.slug)} class="transition duration-500 group-hover:scale-105" />
               </span>
               <div class="flex flex-1 flex-col p-6 pt-5">
                 <h3 class="text-base font-bold text-ink-900">{t3(r.title, locale)}</h3>
